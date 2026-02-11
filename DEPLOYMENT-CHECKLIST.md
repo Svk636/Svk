@@ -1,57 +1,53 @@
-# SVK Blueprint - Deployment Checklist
+# GitHub Deployment Guide
 
-## Pre-Deployment
+## 馃殌 Quick Deploy to GitHub Pages
 
-### Files Ready
-- [ ] index.html uploaded
-- [ ] manifest.json uploaded
-- [ ] service-worker.js uploaded
-- [ ] .htaccess uploaded (Apache) or nginx config updated
-- [ ] icons/ directory with all 8 icon sizes
-- [ ] README.md for documentation
+1. **Create Repository** on GitHub.com named "svk-blueprint"
 
-### Icons Created
-- [ ] icon-72.png, icon-96.png, icon-128.png, icon-144.png
-- [ ] icon-152.png, icon-192.png ⭐, icon-384.png, icon-512.png ⭐
+2. **Upload Files**
+   ```bash
+   git clone https://github.com/YOUR-USERNAME/svk-blueprint.git
+   cd svk-blueprint
+   # Copy all files here
+   git add .
+   git commit -m "Initial commit"
+   git push origin main
+   ```
 
-### Server Configuration
-- [ ] HTTPS enabled and working
-- [ ] SSL certificate valid
-- [ ] Compression enabled (gzip/brotli)
-- [ ] Security headers configured
+3. **Enable Pages**
+   - Settings 鈫� Pages
+   - Source: main branch 鈫� Save
 
----
+4. **Generate Icons** (Required)
+   - Visit https://realfavicongenerator.net/
+   - Upload icons/icon-base.svg
+   - Download and place in icons/
 
-## Testing Checklist
+5. **Visit:** https://YOUR-USERNAME.github.io/svk-blueprint
 
-### Desktop
-- [ ] Chrome: Loads, PWA install, offline mode
-- [ ] Firefox: Loads, offline mode
-- [ ] Safari: Loads, basic functionality
+## 鉁� Pre-Deployment Checklist
 
-### Mobile
-- [ ] Chrome Android: Loads, install, offline
-- [ ] Safari iOS: Loads, add to home screen
+- [ ] All files uploaded
+- [ ] Icons generated (8 sizes)
+- [ ] HTTPS enabled
+- [ ] Service worker registers
+- [ ] PWA installs
+- [ ] Offline mode works
 
-### Functionality
-- [ ] Create habit, toggle completion, timer
-- [ ] Quick capture, timeblock, journal
-- [ ] Export/import data
-- [ ] All tabs load correctly
+## 馃敡 Alternative Deployments
 
-### Performance
-- [ ] Page loads < 3 seconds
-- [ ] No console errors
-- [ ] Lighthouse score > 90
+**Vercel:** Import GitHub repo 鈫� Auto-deploy
+**Netlify:** Drag & drop folder 鈫� Deploy
+**Traditional:** Upload via FTP, enable SSL
 
----
+## 馃摑 Required Files
 
-## Success Criteria
+- index.html, styles.css, app.js
+- service-worker.js, manifest.json
+- icons/ (with 8 PNG files)
+- .htaccess (for Apache)
 
-✅ Works on all major browsers
-✅ PWA installs successfully  
-✅ Offline mode works
-✅ No critical errors
-✅ Mobile responsive
+**Icon Sizes:** 72, 96, 128, 144, 152, 192*, 384, 512*
+(*required for PWA)
 
-**All checked? Production-ready! 🎉**
+See README.md for full documentation.
