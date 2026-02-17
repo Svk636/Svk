@@ -743,411 +743,356 @@ FIRST-TIME USER FLOW:
         .empty-state { text-align: center; padding: 48px 20px; color: var(--dim); font-size: 14px; }
         .empty-state-icon { font-size: 44px; margin-bottom: 12px; opacity: 0.6; }
         
-        /* VAULT WORLD-CLASS STYLES */
-        .vault-search-bar {
-            position: sticky; top: 0; z-index: 10; background: var(--void);
-            padding: 12px 0; margin-bottom: 16px;
+        /* ===== VAULT ZEN REDESIGN ===== */
+
+        /* Main tab switcher — LEARN / EARN */
+        .vault-main-switcher {
+            display: flex;
+            gap: 0;
+            margin-bottom: 0;
+            border-bottom: 1px solid var(--zen-border);
         }
-        .vault-search-input {
-            width: 100%; padding: 12px 16px 12px 42px;
-            background: var(--sub); border: 1px solid var(--border);
-            border-radius: 12px; color: var(--text); font-size: 14px;
-            transition: all 0.2s;
+        .vault-main-btn {
+            flex: 1;
+            padding: 14px 12px;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            color: var(--zen-stone);
+            font-family: var(--font);
+            font-size: 10px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
-        .vault-search-input:focus {
-            border-color: var(--accent); background: var(--card);
-            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+        .vault-main-btn:hover { color: rgba(245,240,232,0.6); }
+        .vault-main-btn.active {
+            color: rgba(245,240,232,0.9);
+            border-bottom-color: rgba(245,240,232,0.5);
         }
-        .vault-search-icon {
-            position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
-            color: var(--dim); pointer-events: none;
+
+        /* Sub-category nav pills */
+        .vault-sub-nav {
+            display: flex;
+            gap: 6px;
+            padding: 20px 0 8px;
+            margin-bottom: 8px;
+            overflow-x: auto;
+            scrollbar-width: none;
         }
-        .vault-filters {
-            display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px;
-            padding: 12px; background: var(--sub); border-radius: 12px;
+        .vault-sub-nav::-webkit-scrollbar { display: none; }
+        .vault-sub-btn {
+            flex-shrink: 0;
+            padding: 6px 14px;
+            background: transparent;
+            border: 1px solid var(--zen-border);
+            border-radius: 1px;
+            color: var(--zen-stone);
+            font-family: var(--font);
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            white-space: nowrap;
         }
-        .vault-filter-chip {
-            padding: 6px 12px; background: var(--card); border: 1px solid var(--border);
-            border-radius: 8px; font-size: 11px; cursor: pointer; transition: all 0.2s;
-            display: flex; align-items: center; gap: 6px;
+        .vault-sub-btn:hover {
+            color: rgba(245,240,232,0.7);
+            border-color: rgba(245,240,232,0.2);
         }
-        .vault-filter-chip:hover { background: var(--sub); border-color: var(--accent); }
-        .vault-filter-chip.active { background: var(--accent); color: var(--void); border-color: var(--accent); }
-        .vault-view-toggle {
-            display: flex; gap: 4px; padding: 4px; background: var(--sub);
-            border-radius: 10px; border: 1px solid var(--border);
+        .vault-sub-btn.active {
+            color: rgba(245,240,232,0.9);
+            border-color: rgba(245,240,232,0.35);
+            background: var(--zen-mist);
         }
-        .vault-view-btn {
-            padding: 8px 12px; background: transparent; border: none;
-            color: var(--dim); cursor: pointer; border-radius: 8px;
-            transition: all 0.2s; font-size: 12px;
+
+        /* Vault section header */
+        .vault-section-header {
+            padding: 24px 0 20px;
+            text-align: center;
         }
-        .vault-view-btn.active { background: var(--accent); color: var(--void); }
-        .vault-item-card {
-            background: var(--card); border: 1px solid var(--border);
-            border-radius: 12px; padding: 16px; margin-bottom: 12px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative; overflow: hidden;
+        .vault-section-kanji {
+            font-size: 10px;
+            letter-spacing: 5px;
+            color: var(--zen-stone);
+            text-transform: uppercase;
+            font-family: var(--font);
+            opacity: 0.6;
+            margin-bottom: 6px;
         }
-        .vault-item-card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0;
-            height: 3px; background: linear-gradient(90deg, var(--accent), var(--purple));
-            transform: scaleX(0); transform-origin: left;
-            transition: transform 0.3s ease;
-        }
-        .vault-item-card:hover {
-            border-color: var(--accent); transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(255, 215, 0, 0.15);
-        }
-        .vault-item-card:hover::before { transform: scaleX(1); }
-        .vault-item-card.starred::after {
-            content: '⭐'; position: absolute; top: 12px; right: 12px;
-            font-size: 18px; opacity: 0.8;
-        }
-        .vault-item-header {
-            display: flex; justify-content: space-between; align-items: start;
-            margin-bottom: 12px; gap: 12px;
-        }
-        .vault-item-title {
-            font-weight: 700; font-size: 16px; line-height: 1.4;
-            color: var(--text); flex: 1;
-        }
-        .vault-item-meta {
-            display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
-            margin-bottom: 10px; font-size: 11px; color: var(--dim);
-        }
-        .vault-item-content {
-            color: var(--dim); line-height: 1.7; font-size: 14px;
-            margin-bottom: 12px; white-space: pre-wrap;
-        }
-        .vault-item-tags {
-            display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px;
-        }
-        .vault-tag {
-            padding: 4px 10px; background: var(--sub); border-radius: 6px;
-            font-size: 10px; font-weight: 600; letter-spacing: 0.5px;
-            border: 1px solid var(--border); transition: all 0.2s;
-        }
-        .vault-tag:hover { background: var(--accent); color: var(--void); border-color: var(--accent); }
-        .vault-item-footer {
-            display: flex; justify-content: space-between; align-items: center;
-            padding-top: 12px; border-top: 1px solid var(--border);
-        }
-        .vault-item-actions {
-            display: flex; gap: 6px;
-        }
-        .vault-action-btn {
-            padding: 6px 10px; background: var(--sub); border: 1px solid var(--border);
-            border-radius: 6px; font-size: 11px; cursor: pointer;
-            transition: all 0.2s; color: var(--text);
-        }
-        .vault-action-btn:hover { background: var(--accent); color: var(--void); border-color: var(--accent); }
-        .vault-action-btn.danger:hover { background: var(--danger); border-color: var(--danger); }
-        .vault-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 16px; margin-bottom: 20px;
-        }
-        .vault-analytics {
-            background: linear-gradient(135deg, var(--card), var(--sub));
-            border: 1px solid var(--border); border-radius: 16px;
-            padding: 20px; margin-bottom: 20px;
-        }
-        .vault-stat-row {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 12px; margin-top: 16px;
-        }
-        .vault-stat-mini {
-            background: var(--void); border-radius: 10px; padding: 12px;
-            border: 1px solid var(--border);
-        }
-        .vault-stat-mini-val {
-            font-size: 24px; font-weight: 700; color: var(--accent);
+        .vault-section-title {
+            font-family: var(--zen-title-font);
+            font-size: 22px;
+            font-weight: 400;
+            color: rgba(245,240,232,0.85);
+            font-style: italic;
+            letter-spacing: 0.5px;
             margin-bottom: 4px;
         }
-        .vault-stat-mini-label {
-            font-size: 10px; color: var(--dim); text-transform: uppercase;
-            letter-spacing: 1px;
+        .vault-section-desc {
+            font-family: var(--zen-font);
+            font-size: 12px;
+            color: var(--zen-stone);
+            font-style: italic;
+            opacity: 0.7;
         }
+
+        /* Vault toolbar */
         .vault-toolbar {
-            display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 16px; gap: 12px; flex-wrap: wrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+        .vault-search-input {
+            flex: 1;
+            padding: 10px 14px 10px 14px;
+            background: transparent;
+            border: 1px solid var(--zen-border);
+            border-radius: 2px;
+            color: rgba(245,240,232,0.8);
+            font-family: var(--zen-font);
+            font-size: 14px;
+            font-style: italic;
+            transition: border-color 0.3s;
+        }
+        .vault-search-input:focus { outline: none; border-color: rgba(245,240,232,0.25); }
+        .vault-search-input::placeholder { color: var(--zen-stone); }
+        .vault-search-icon {
+            display: none; /* replaced by placeholder text */
         }
         .vault-sort-dropdown {
-            padding: 8px 12px; background: var(--sub); border: 1px solid var(--border);
-            border-radius: 8px; color: var(--text); font-size: 12px;
-            cursor: pointer; transition: all 0.2s;
+            padding: 10px 10px;
+            background: transparent;
+            border: 1px solid var(--zen-border);
+            border-radius: 2px;
+            color: var(--zen-stone);
+            font-family: var(--font);
+            font-size: 10px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            min-width: 80px;
         }
-        .vault-sort-dropdown:hover { border-color: var(--accent); }
-        .vault-link-badge {
-            display: inline-flex; align-items: center; gap: 4px;
-            padding: 4px 8px; background: var(--purple); color: var(--text);
-            border-radius: 6px; font-size: 10px; margin-right: 6px;
+        .vault-sort-dropdown:focus { outline: none; border-color: rgba(245,240,232,0.2); }
+        .vault-sort-dropdown option { background: #1c1c1e; }
+        .vault-add-btn {
+            padding: 10px 16px;
+            background: transparent;
+            border: 1px solid var(--zen-border);
+            border-radius: 2px;
+            color: rgba(245,240,232,0.7);
+            font-family: var(--font);
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.25s;
+            white-space: nowrap;
         }
-        .vault-importance-high { border-left: 3px solid var(--danger); }
-        .vault-importance-medium { border-left: 3px solid var(--warn); }
-        .vault-importance-low { border-left: 3px solid var(--blue); }
-        @keyframes slideInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .vault-add-btn:hover {
+            background: var(--zen-mist);
+            border-color: rgba(245,240,232,0.25);
+            color: rgba(245,240,232,0.9);
         }
+
+        /* Vault item card */
         .vault-item-card {
-            animation: slideInUp 0.4s ease-out;
+            background: transparent;
+            border: 1px solid var(--zen-border);
+            border-radius: 2px;
+            padding: 20px 18px;
+            margin-bottom: 12px;
+            position: relative;
+            transition: all 0.35s ease;
+            overflow: hidden;
+            animation: vaultFadeIn 0.35s ease forwards;
+            opacity: 0;
         }
-        
-        /* NEW VAULT ENHANCEMENTS */
+        @keyframes vaultFadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .vault-item-card::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 2px;
+            opacity: 0;
+            transition: opacity 0.35s;
+            background: linear-gradient(to bottom, transparent, rgba(200,185,155,0.5), transparent);
+        }
+        .vault-item-card:hover {
+            background: var(--zen-glow);
+            border-color: rgba(245,240,232,0.18);
+        }
+        .vault-item-card:hover::before { opacity: 1; }
+
+        /* Importance accents — subtle, not loud */
+        .vault-importance-high::before {
+            background: linear-gradient(to bottom, transparent, rgba(180,80,60,0.55), transparent);
+            opacity: 0.7;
+        }
+        .vault-importance-medium::before {
+            background: linear-gradient(to bottom, transparent, rgba(180,150,60,0.4), transparent);
+            opacity: 0.5;
+        }
+
+        /* Pinned item */
         .vault-item-card.pinned {
-            border: 2px solid var(--accent);
-            background: linear-gradient(135deg, var(--card), var(--sub));
+            border-color: rgba(245,240,232,0.2);
+            background: var(--zen-glow);
         }
         .vault-item-card.pinned::after {
-            content: '📌';
+            content: '·';
             position: absolute;
-            top: 12px;
-            right: 12px;
-            font-size: 18px;
+            top: 10px; right: 16px;
+            font-size: 24px;
+            color: rgba(245,240,232,0.25);
+            line-height: 1;
         }
-        .vault-item-card.selected {
-            border-color: var(--purple);
-            background: rgba(147, 51, 234, 0.1);
-        }
-        .vault-batch-bar {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--card);
-            border: 2px solid var(--accent);
-            border-radius: 16px;
-            padding: 16px 24px;
-            display: none;
-            align-items: center;
-            gap: 12px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-            z-index: 1000;
-        }
-        .vault-batch-bar.active {
+
+        /* Item header */
+        .vault-item-header {
             display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            gap: 12px;
         }
-        .vault-filters-panel {
-            background: var(--sub);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 16px;
-            display: none;
+        .vault-item-title {
+            font-family: var(--zen-title-font);
+            font-size: 17px;
+            font-weight: 400;
+            line-height: 1.4;
+            color: rgba(245,240,232,0.88);
+            flex: 1;
+            letter-spacing: 0.2px;
+            font-style: italic;
         }
-        .vault-filters-panel.active {
-            display: block;
-        }
-        .vault-filter-group {
-            margin-bottom: 12px;
-        }
-        .vault-filter-label {
-            font-size: 11px;
-            color: var(--dim);
+        .vault-item-meta {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 10px;
+            font-family: var(--font);
+            font-size: 10px;
+            color: var(--zen-stone);
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-            display: block;
         }
-        .vault-filter-chips {
+        .vault-item-content {
+            font-family: var(--zen-font);
+            font-size: 14px;
+            line-height: 1.8;
+            color: rgba(245,240,232,0.55);
+            margin-bottom: 12px;
+            white-space: pre-wrap;
+            font-weight: 300;
+        }
+        .vault-item-tags {
             display: flex;
             gap: 6px;
             flex-wrap: wrap;
-        }
-        .vault-filter-chip {
-            padding: 6px 12px;
-            background: var(--void);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 11px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .vault-filter-chip:hover {
-            border-color: var(--accent);
-        }
-        .vault-filter-chip.active {
-            background: var(--accent);
-            color: var(--void);
-            border-color: var(--accent);
-        }
-        .vault-view-compact .vault-item-card {
-            padding: 12px;
-            margin-bottom: 8px;
-        }
-        .vault-view-compact .vault-item-title {
-            font-size: 14px;
-        }
-        .vault-view-compact .vault-item-content {
-            font-size: 12px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        .vault-view-compact .vault-item-footer {
-            padding-top: 8px;
-        }
-        .vault-checkbox {
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-            accent-color: var(--accent);
-        }
-        .vault-link-item {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 4px 8px;
-            background: var(--purple);
-            color: var(--text);
-            border-radius: 6px;
-            font-size: 10px;
-            margin-right: 6px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .vault-link-item:hover {
-            background: var(--accent);
-            transform: scale(1.05);
-        }
-        .vault-timeline {
-            position: relative;
-            padding-left: 40px;
-        }
-        .vault-timeline::before {
-            content: '';
-            position: absolute;
-            left: 15px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(180deg, var(--accent), var(--purple));
-        }
-        .vault-timeline-item {
-            position: relative;
-            margin-bottom: 24px;
-        }
-        .vault-timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -32px;
-            top: 8px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--accent);
-            border: 3px solid var(--void);
-        }
-        .vault-timeline-date {
-            font-size: 11px;
-            color: var(--dim);
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-        .vault-markdown h1, .vault-markdown h2, .vault-markdown h3 {
-            color: var(--accent);
-            margin: 16px 0 8px;
-        }
-        .vault-markdown code {
-            background: var(--sub);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: monospace;
-            font-size: 12px;
-        }
-        .vault-markdown ul, .vault-markdown ol {
-            margin-left: 20px;
             margin-bottom: 12px;
         }
-        .vault-markdown blockquote {
-            border-left: 3px solid var(--accent);
-            padding-left: 12px;
-            margin: 12px 0;
-            color: var(--dim);
+        .vault-tag {
+            padding: 3px 10px;
+            border: 1px solid var(--zen-border);
+            border-radius: 1px;
+            font-family: var(--font);
+            font-size: 9px;
+            letter-spacing: 1.5px;
+            color: var(--zen-stone);
+            text-transform: uppercase;
         }
-        .vault-color-picker {
+
+        /* Footer row */
+        .vault-item-footer {
             display: flex;
-            gap: 8px;
-            margin-top: 8px;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 12px;
+            border-top: 1px solid var(--zen-border);
         }
-        .vault-color-option {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
+        .vault-item-actions {
+            display: flex;
+            gap: 4px;
+            opacity: 0;
+            transition: opacity 0.25s;
+        }
+        .vault-item-card:hover .vault-item-actions { opacity: 1; }
+        .vault-action-btn {
+            padding: 5px 10px;
+            background: transparent;
+            border: 1px solid transparent;
+            border-radius: 2px;
+            font-family: var(--font);
+            font-size: 9px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
             cursor: pointer;
-            border: 2px solid var(--border);
+            color: var(--zen-stone);
             transition: all 0.2s;
         }
-        .vault-color-option:hover {
-            transform: scale(1.1);
-            border-color: var(--text);
+        .vault-action-btn:hover {
+            border-color: var(--zen-border);
+            color: rgba(245,240,232,0.7);
+            background: var(--zen-mist);
         }
-        .vault-color-option.selected {
-            border-color: var(--accent);
-            border-width: 3px;
+        .vault-action-btn.danger:hover {
+            border-color: rgba(180,70,60,0.3);
+            color: rgba(200,90,70,0.9);
+            background: transparent;
         }
-        
-        /* NEW VAULT ENHANCEMENTS */
-        /* Pinned items */
-        .vault-item-card.pinned {
-            background: linear-gradient(135deg, var(--card), rgba(255, 215, 0, 0.05));
-            border: 2px solid var(--accent);
+
+        /* Promoted badge */
+        .vault-promoted-badge {
+            font-family: var(--font);
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--zen-stone);
+            opacity: 0.6;
+            margin-bottom: 8px;
         }
-        .vault-item-card.pinned::after {
-            content: '📌'; position: absolute; top: 12px; right: 42px;
-            font-size: 16px; opacity: 0.9;
+
+        /* Completed item */
+        .vault-item-card.completed-item {
+            opacity: 0.42;
         }
-        
-        /* Batch selection mode */
-        .vault-item-card.selectable {
-            cursor: pointer;
-            padding-left: 50px;
-        }
-        .vault-item-card.selectable::before {
-            content: '';
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--border);
-            border-radius: 4px;
-            background: var(--void);
-        }
-        .vault-item-card.selectable.selected::before {
-            background: var(--accent);
-            border-color: var(--accent);
-        }
-        .vault-item-card.selectable.selected::after {
-            content: '✓';
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--void);
-            font-weight: 700;
-            font-size: 14px;
-        }
-        
-        /* Compact view */
+
+        /* Legacy / hidden stubs */
+        .vault-analytics { display: none; }
+        .vault-batch-bar { display: none !important; }
+        .vault-filters-panel { display: none !important; }
+        .vault-filter-group, .vault-filter-label, .vault-filter-chips, .vault-filter-chip {}
+        .vault-view-toggle { display: none; }
+        .vault-grid { display: block; }
+        .vault-stat-row, .vault-stat-mini, .vault-stat-mini-val, .vault-stat-mini-label {}
+        .vault-link-badge, .vault-checkbox, .vault-link-item {}
+        .vault-timeline { padding-left: 0; }
+        .vault-timeline::before { display: none; }
+        .vault-timeline-item { position: relative; margin-bottom: 24px; }
+        .vault-timeline-date { font-size: 11px; color: var(--dim); margin-bottom: 8px; font-weight: 600; }
+        .vault-markdown h1, .vault-markdown h2, .vault-markdown h3 { color: rgba(245,240,232,0.7); margin: 16px 0 8px; }
+        .vault-markdown code { background: var(--sub); padding: 2px 6px; border-radius: 2px; font-family: monospace; font-size: 12px; }
+        .vault-markdown ul, .vault-markdown ol { margin-left: 20px; margin-bottom: 12px; }
+        .vault-markdown blockquote { border-left: 2px solid var(--zen-border); padding-left: 12px; margin: 12px 0; color: var(--zen-stone); }
+        .vault-color-picker { display: flex; gap: 8px; margin-top: 8px; }
+        .vault-color-option { width: 28px; height: 28px; border-radius: 2px; cursor: pointer; border: 1px solid var(--zen-border); transition: all 0.2s; }
+        .vault-color-option:hover { transform: scale(1.1); border-color: rgba(245,240,232,0.3); }
+        .vault-color-option.selected { border-color: rgba(245,240,232,0.6); border-width: 2px; }
+
+        /* Batch / compact legacy stubs */
+        .vault-item-card.selectable { cursor: pointer; }
         .vault-item-card.compact {
             padding: 10px 14px;
             margin-bottom: 6px;
         }
-        .vault-item-card.compact .vault-item-title {
-            font-size: 14px;
-            margin-bottom: 4px;
-        }
-        .vault-item-card.compact .vault-item-content {
-            font-size: 12px;
-            margin-bottom: 6px;
-            max-height: 40px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+        .vault-item-card.compact .vault-item-title { font-size: 14px; margin-bottom: 4px; }
+        .vault-item-card.compact .vault-item-content { font-size: 12px; margin-bottom: 6px; max-height: 40px; overflow: hidden; text-overflow: ellipsis; }
         .vault-item-card.compact .vault-item-footer {
             padding-top: 8px;
         }
@@ -1753,6 +1698,515 @@ FIRST-TIME USER FLOW:
         }
         
         /* ===== END SYSTEM TAB ENHANCEMENTS CSS ===== */
+
+        /* ===== ZEN PHILOSOPHY - REFLECT · JOURNAL · REVIEWS ===== */
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=IM+Fell+English:ital@0;1&display=swap');
+
+        :root {
+            --zen-ink: #1a1814;
+            --zen-rice: #f5f0e8;
+            --zen-stone: #8a8070;
+            --zen-ash: #3a3530;
+            --zen-moss: #4a5240;
+            --zen-rust: #7a4030;
+            --zen-mist: rgba(245, 240, 232, 0.06);
+            --zen-border: rgba(245, 240, 232, 0.12);
+            --zen-glow: rgba(245, 240, 232, 0.04);
+            --zen-font: 'Cormorant Garamond', 'Georgia', serif;
+            --zen-title-font: 'IM Fell English', 'Georgia', serif;
+        }
+
+        /* === ZEN WRAPPER === */
+        .zen-container {
+            padding: 4px 0 40px;
+        }
+
+        /* === ZEN HEADER SECTION === */
+        .zen-header {
+            text-align: center;
+            padding: 28px 0 24px;
+            position: relative;
+        }
+        .zen-header::before {
+            content: '';
+            display: block;
+            width: 1px;
+            height: 32px;
+            background: linear-gradient(to bottom, transparent, var(--zen-border));
+            margin: 0 auto 20px;
+        }
+        .zen-header-kanji {
+            font-size: 11px;
+            letter-spacing: 6px;
+            color: var(--zen-stone);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            font-family: var(--font);
+            opacity: 0.7;
+        }
+        .zen-header-title {
+            font-family: var(--zen-title-font);
+            font-size: 28px;
+            font-weight: 400;
+            color: rgba(245,240,232,0.9);
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            font-style: italic;
+        }
+        .zen-header-subtitle {
+            font-family: var(--zen-font);
+            font-size: 13px;
+            color: var(--zen-stone);
+            font-style: italic;
+            letter-spacing: 0.5px;
+        }
+        .zen-header::after {
+            content: '— ○ —';
+            display: block;
+            margin-top: 18px;
+            color: var(--zen-stone);
+            font-size: 11px;
+            letter-spacing: 8px;
+            opacity: 0.5;
+        }
+
+        /* === ZEN SEGMENT SWITCHER (Morning/Evening) === */
+        .zen-segment {
+            display: flex;
+            background: var(--zen-mist);
+            border: 1px solid var(--zen-border);
+            border-radius: 3px;
+            padding: 3px;
+            margin-bottom: 24px;
+            gap: 3px;
+        }
+        .zen-seg-btn {
+            flex: 1;
+            padding: 9px 12px;
+            background: transparent;
+            border: none;
+            color: var(--zen-stone);
+            font-family: var(--zen-font);
+            font-size: 14px;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+            text-transform: uppercase;
+        }
+        .zen-seg-btn:hover {
+            color: rgba(245,240,232,0.7);
+            background: var(--zen-glow);
+        }
+        .zen-seg-btn.active {
+            background: var(--zen-ash);
+            color: rgba(245,240,232,0.9);
+        }
+        .zen-seg-btn.morning.active {
+            background: linear-gradient(135deg, rgba(120,90,60,0.4), rgba(80,60,40,0.4));
+            border: 1px solid rgba(200,160,100,0.2);
+            color: rgba(220,190,140,0.9);
+        }
+        .zen-seg-btn.evening.active {
+            background: linear-gradient(135deg, rgba(40,50,80,0.5), rgba(30,35,60,0.5));
+            border: 1px solid rgba(100,120,180,0.2);
+            color: rgba(160,180,220,0.9);
+        }
+
+        /* === ZEN ACTION ROW === */
+        .zen-action-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: stretch;
+        }
+        .zen-primary-btn {
+            flex: 1;
+            padding: 13px 16px;
+            background: transparent;
+            border: 1px solid var(--zen-border);
+            border-radius: 2px;
+            color: rgba(245,240,232,0.8);
+            font-family: var(--zen-font);
+            font-size: 15px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .zen-primary-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--zen-mist);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .zen-primary-btn:hover::before { opacity: 1; }
+        .zen-primary-btn:hover {
+            border-color: rgba(245,240,232,0.25);
+            color: rgba(245,240,232,0.95);
+        }
+        .zen-icon-btn {
+            width: 44px;
+            padding: 0;
+            background: transparent;
+            border: 1px solid var(--zen-border);
+            border-radius: 2px;
+            color: var(--zen-stone);
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .zen-icon-btn:hover {
+            border-color: rgba(245,240,232,0.2);
+            color: rgba(245,240,232,0.7);
+            background: var(--zen-mist);
+        }
+
+        /* === ZEN UTILITY ROW === */
+        .zen-utility-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        .zen-util-btn {
+            flex: 1;
+            padding: 8px;
+            background: transparent;
+            border: 1px solid var(--zen-border);
+            border-radius: 2px;
+            color: var(--zen-stone);
+            font-family: var(--font);
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .zen-util-btn:hover {
+            color: rgba(245,240,232,0.7);
+            border-color: rgba(245,240,232,0.2);
+            background: var(--zen-mist);
+        }
+        .zen-util-btn.active {
+            color: rgba(245,240,232,0.8);
+            border-color: rgba(245,240,232,0.3);
+            background: var(--zen-ash);
+        }
+
+        /* === ZEN SEARCH === */
+        .zen-search-wrap {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .zen-search {
+            width: 100%;
+            padding: 11px 40px 11px 14px;
+            background: transparent;
+            border: 1px solid var(--zen-border);
+            border-radius: 2px;
+            color: rgba(245,240,232,0.8);
+            font-family: var(--zen-font);
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            transition: border-color 0.3s;
+        }
+        .zen-search:focus {
+            outline: none;
+            border-color: rgba(245,240,232,0.25);
+        }
+        .zen-search::placeholder { color: var(--zen-stone); font-style: italic; }
+        .zen-search-clear {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--zen-stone);
+            cursor: pointer;
+            font-size: 18px;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+        .zen-search-clear:hover { color: rgba(245,240,232,0.7); }
+
+        /* === ZEN SORT === */
+        .zen-sort-row {
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .zen-sort-label {
+            font-family: var(--font);
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: var(--zen-stone);
+            text-transform: uppercase;
+            white-space: nowrap;
+            opacity: 0.7;
+        }
+        .zen-sort-select {
+            flex: 1;
+            padding: 8px 12px;
+            background: transparent;
+            border: 1px solid var(--zen-border);
+            border-radius: 2px;
+            color: var(--zen-stone);
+            font-family: var(--font);
+            font-size: 12px;
+        }
+        .zen-sort-select:focus { outline: none; border-color: rgba(245,240,232,0.2); }
+        .zen-sort-select option { background: #1c1c1e; }
+
+        /* === ZEN CARD === */
+        .zen-card {
+            background: transparent;
+            border: 1px solid var(--zen-border);
+            border-radius: 3px;
+            padding: 22px 20px;
+            margin-bottom: 16px;
+            position: relative;
+            transition: all 0.4s ease;
+            overflow: hidden;
+        }
+        .zen-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, var(--zen-stone), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        .zen-card:hover {
+            background: var(--zen-glow);
+            border-color: rgba(245,240,232,0.18);
+        }
+        .zen-card:hover::before { opacity: 0.6; }
+
+        .zen-card-morning { }
+        .zen-card-morning::before {
+            background: linear-gradient(to bottom, transparent, rgba(200,160,100,0.5), transparent);
+        }
+        .zen-card-evening::before {
+            background: linear-gradient(to bottom, transparent, rgba(120,140,200,0.5), transparent);
+        }
+
+        /* === ZEN DATE BADGE === */
+        .zen-date {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+        .zen-date-line {
+            flex: 1;
+            height: 1px;
+            background: var(--zen-border);
+        }
+        .zen-date-text {
+            font-family: var(--font);
+            font-size: 10px;
+            color: var(--zen-stone);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        /* === ZEN BODY TEXT === */
+        .zen-body {
+            font-family: var(--zen-font);
+            font-size: 16px;
+            line-height: 1.85;
+            color: rgba(245,240,232,0.82);
+            white-space: pre-wrap;
+            font-weight: 300;
+        }
+
+        /* === ZEN TAGS === */
+        .zen-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 16px;
+        }
+        .zen-tag {
+            padding: 3px 10px;
+            border: 1px solid var(--zen-border);
+            border-radius: 1px;
+            font-family: var(--font);
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            color: var(--zen-stone);
+            text-transform: uppercase;
+        }
+
+        /* === ZEN EDIT MARK === */
+        .zen-edited {
+            font-family: var(--font);
+            font-size: 10px;
+            color: var(--zen-stone);
+            margin-top: 12px;
+            letter-spacing: 1px;
+            font-style: italic;
+            opacity: 0.6;
+        }
+
+        /* === ZEN CARD ACTIONS === */
+        .zen-card-actions {
+            display: flex;
+            gap: 4px;
+            margin-top: 16px;
+            padding-top: 14px;
+            border-top: 1px solid var(--zen-border);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .zen-card:hover .zen-card-actions { opacity: 1; }
+        .zen-act-btn {
+            flex: 1;
+            padding: 7px 4px;
+            background: transparent;
+            border: 1px solid transparent;
+            border-radius: 2px;
+            color: var(--zen-stone);
+            font-family: var(--font);
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .zen-act-btn:hover {
+            border-color: var(--zen-border);
+            color: rgba(245,240,232,0.7);
+            background: var(--zen-mist);
+        }
+        .zen-act-btn.danger:hover {
+            border-color: rgba(200,80,60,0.3);
+            color: rgba(200,100,80,0.9);
+        }
+
+        /* === ZEN REVIEW SECTIONS === */
+        .zen-review-section {
+            margin-bottom: 18px;
+        }
+        .zen-review-label {
+            font-family: var(--font);
+            font-size: 10px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--zen-stone);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .zen-review-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--zen-border);
+        }
+
+        /* === ZEN EMPTY STATE === */
+        .zen-empty {
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+        }
+        .zen-empty-symbol {
+            font-size: 32px;
+            margin-bottom: 20px;
+            opacity: 0.3;
+            display: block;
+        }
+        .zen-empty-text {
+            font-family: var(--zen-title-font);
+            font-size: 18px;
+            color: var(--zen-stone);
+            font-style: italic;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .zen-empty-sub {
+            font-family: var(--font);
+            font-size: 11px;
+            color: var(--zen-stone);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.5;
+        }
+
+        /* === ZEN DIVIDER === */
+        .zen-divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 24px 0;
+            opacity: 0.4;
+        }
+        .zen-divider::before, .zen-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--zen-border);
+        }
+        .zen-divider-mark {
+            font-size: 10px;
+            color: var(--zen-stone);
+            letter-spacing: 4px;
+        }
+
+        /* === ZEN CHECKBOX === */
+        .zen-checkbox {
+            width: 18px;
+            height: 18px;
+            border: 1px solid var(--zen-border);
+            border-radius: 1px;
+            margin-right: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+        .zen-checkbox.checked {
+            background: var(--zen-stone);
+            border-color: var(--zen-stone);
+        }
+        .zen-checkbox.checked::after {
+            content: '✓';
+            color: var(--void);
+            font-size: 12px;
+        }
+
+        /* Fade-in animation for zen cards */
+        @keyframes zenFade {
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .zen-card {
+            animation: zenFade 0.4s ease forwards;
+        }
+        .zen-card:nth-child(1) { animation-delay: 0.05s; }
+        .zen-card:nth-child(2) { animation-delay: 0.10s; }
+        .zen-card:nth-child(3) { animation-delay: 0.15s; }
+        .zen-card:nth-child(4) { animation-delay: 0.20s; }
+        .zen-card:nth-child(5) { animation-delay: 0.25s; }
+
+        /* ===== END ZEN PHILOSOPHY CSS ===== */
     </style>
 </head>
 <body>
@@ -2202,9 +2656,9 @@ const App = {
         // Vault metadata and settings
         if (!this.data.vaultPromotions) this.data.vaultPromotions = [];
         if (!this.data.vaultSettings) this.data.vaultSettings = {
-            viewMode: 'card', // 'card', 'compact', 'timeline'
+            viewMode: 'card',
             sortBy: 'recent',
-            showAnalytics: true,
+            showAnalytics: false,
             searchQuery: '',
             activeFilters: [],
             selectedTags: [],
@@ -4033,175 +4487,53 @@ const App = {
         return html;
     },
 
-    // VIEW: VAULT
-// ENHANCED VIEW VAULT FUNCTION
+    // VIEW: VAULT — Zen redesign
 viewVault() {
-    // Initialize data structures
     if (!this.data.vaultLearn) this.data.vaultLearn = { ideas: [], notes: [], books: [], skills: [] };
     if (!this.data.vaultEarn) this.data.vaultEarn = { strat: [], exec: [], leverage: [], contacts: [] };
     if (!this.data.vaultPromotions) this.data.vaultPromotions = [];
-    if (!this.data.vaultSettings) this.data.vaultSettings = { viewMode: 'card', sortBy: 'recent', showAnalytics: true };
-    
+    if (!this.data.vaultSettings) this.data.vaultSettings = { viewMode: 'card', sortBy: 'recent', showAnalytics: false, searchQuery: '', activeFilters: [], selectedTags: [], dateRange: { start: null, end: null }, importanceFilter: [], starredOnly: false, pinnedOnly: false, batchMode: false, selectedItems: [], categoryColors: {}, showFilters: false };
+
     const mainTab = this.sub.vaultMain || 'learn';
-    const settings = this.data.vaultSettings;
-    
-    let html = `
-        <div class="segment">
-            <button class="segment-btn ${mainTab === 'learn' ? 'active' : ''}" onclick="App.sub.vaultMain='learn';App.sub.vault='ideas';App.render()">🧠 LEARN</button>
-            <button class="segment-btn ${mainTab === 'earn' ? 'active' : ''}" onclick="App.sub.vaultMain='earn';App.sub.vault='strat';App.render()">💰 EARN</button>
+
+    let html = `<div style="padding-top: 4px;">`;
+
+    // Main switcher — LEARN / EARN
+    html += `
+        <div class="vault-main-switcher">
+            <button class="vault-main-btn ${mainTab === 'learn' ? 'active' : ''}"
+                onclick="App.sub.vaultMain='learn';App.sub.vault='ideas';App.data.vaultSettings.searchQuery='';App.render()">
+                Learn
+            </button>
+            <button class="vault-main-btn ${mainTab === 'earn' ? 'active' : ''}"
+                onclick="App.sub.vaultMain='earn';App.sub.vault='strat';App.data.vaultSettings.searchQuery='';App.render()">
+                Earn
+            </button>
         </div>`;
-    
-    // Calculate comprehensive stats
-    const now = Date.now();
-    const weekAgo = now - (7 * 24 * 60 * 60 * 1000);
-    const monthAgo = now - (30 * 24 * 60 * 60 * 1000);
-    
+
     if (mainTab === 'learn') {
-        const allItems = (this.data.vaultLearn.ideas || []).length + (this.data.vaultLearn.notes || []).length + 
-                        (this.data.vaultLearn.books || []).length + (this.data.vaultLearn.skills || []).length;
-        const weekItems = ['ideas', 'notes', 'books', 'skills'].reduce((sum, key) => 
-            sum + (this.data.vaultLearn[key] || []).filter(i => new Date(i.created).getTime() > weekAgo).length, 0);
-        const monthItems = ['ideas', 'notes', 'books', 'skills'].reduce((sum, key) => 
-            sum + (this.data.vaultLearn[key] || []).filter(i => new Date(i.created).getTime() > monthAgo).length, 0);
-        const promoted = (this.data.vaultPromotions || []).filter(p => new Date(p.created).getTime() > weekAgo).length;
-        const starred = ['ideas', 'notes', 'books', 'skills'].reduce((sum, key) => 
-            sum + (this.data.vaultLearn[key] || []).filter(i => i.starred).length, 0);
-        
-        // Enhanced Analytics Dashboard
-        if (settings.showAnalytics) {
-            html += `
-                <div class="vault-analytics">
-                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-                        <h3 style="color:var(--accent);font-size:16px;margin:0;">📊 LEARN Analytics</h3>
-                        <button class="vault-action-btn" onclick="App.toggleVaultAnalytics()" style="padding:4px 8px;font-size:10px;">
-                            Hide
-                        </button>
-                    </div>
-                    <div class="vault-stat-row">
-                        <div class="vault-stat-mini">
-                            <div class="vault-stat-mini-val">${allItems}</div>
-                            <div class="vault-stat-mini-label">Total Items</div>
-                        </div>
-                        <div class="vault-stat-mini">
-                            <div class="vault-stat-mini-val">${weekItems}</div>
-                            <div class="vault-stat-mini-label">This Week</div>
-                        </div>
-                        <div class="vault-stat-mini">
-                            <div class="vault-stat-mini-val">${monthItems}</div>
-                            <div class="vault-stat-mini-label">This Month</div>
-                        </div>
-                        <div class="vault-stat-mini">
-                            <div class="vault-stat-mini-val">${promoted}</div>
-                            <div class="vault-stat-mini-label">Promoted</div>
-                        </div>
-                        <div class="vault-stat-mini">
-                            <div class="vault-stat-mini-val">${starred}</div>
-                            <div class="vault-stat-mini-label">Starred</div>
-                        </div>
-                    </div>
-                </div>`;
-        } else {
-            html += `
-                <div style="text-align:center;margin-bottom:16px;">
-                    <button class="btn-sec" onclick="App.toggleVaultAnalytics()">📊 Show Analytics</button>
-                </div>`;
-        }
-        
-        html += `
-            <div class="card" style="margin-bottom:14px;padding:14px;">
-                <div style="font-weight:700;font-size:13px;margin-bottom:10px;color:var(--accent);">☀️ Morning Flow (5 min)</div>
-                <div style="font-size:12px;color:var(--dim);line-height:1.7;">
-                    Random thought → IDEA<br>
-                    Thing you noticed → NOTE<br>
-                    Book insight → BOOK<br>
-                    Skill gap → SKILL
-                </div>
-            </div>`;
-        
         const sub = this.sub.vault || 'ideas';
         html += `
-            <div class="segment">
-                <button class="segment-btn ${sub === 'ideas' ? 'active' : ''}" onclick="App.sub.vault='ideas';App.render()">💡 IDEA</button>
-                <button class="segment-btn ${sub === 'notes' ? 'active' : ''}" onclick="App.sub.vault='notes';App.render()">📝 NOTE</button>
-                <button class="segment-btn ${sub === 'books' ? 'active' : ''}" onclick="App.sub.vault='books';App.render()">📚 BOOK</button>
-                <button class="segment-btn ${sub === 'skills' ? 'active' : ''}" onclick="App.sub.vault='skills';App.render()">🎯 SKILL</button>
+            <div class="vault-sub-nav">
+                <button class="vault-sub-btn ${sub === 'ideas' ? 'active' : ''}" onclick="App.sub.vault='ideas';App.data.vaultSettings.searchQuery='';App.render()">Ideas</button>
+                <button class="vault-sub-btn ${sub === 'notes' ? 'active' : ''}" onclick="App.sub.vault='notes';App.data.vaultSettings.searchQuery='';App.render()">Notes</button>
+                <button class="vault-sub-btn ${sub === 'books' ? 'active' : ''}" onclick="App.sub.vault='books';App.data.vaultSettings.searchQuery='';App.render()">Books</button>
+                <button class="vault-sub-btn ${sub === 'skills' ? 'active' : ''}" onclick="App.sub.vault='skills';App.data.vaultSettings.searchQuery='';App.render()">Skills</button>
             </div>`;
-        
         html += this.renderLearnSectionEnhanced(sub);
-        
     } else {
-        const allItems = (this.data.vaultEarn.strat || []).length + (this.data.vaultEarn.exec || []).length + 
-                        (this.data.vaultEarn.leverage || []).length + (this.data.vaultEarn.contacts || []).length;
-        const weekItems = ['strat', 'exec', 'leverage', 'contacts'].reduce((sum, key) => 
-            sum + (this.data.vaultEarn[key] || []).filter(i => new Date(i.created).getTime() > weekAgo).length, 0);
-        const monthItems = ['strat', 'exec', 'leverage', 'contacts'].reduce((sum, key) => 
-            sum + (this.data.vaultEarn[key] || []).filter(i => new Date(i.created).getTime() > monthAgo).length, 0);
-        const executed = (this.data.vaultEarn.exec || []).filter(e => e.completed).length;
-        const starred = ['strat', 'exec', 'leverage', 'contacts'].reduce((sum, key) => 
-            sum + (this.data.vaultEarn[key] || []).filter(i => i.starred).length, 0);
-        
-        if (settings.showAnalytics) {
-            html += `
-                <div class="vault-analytics">
-                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-                        <h3 style="color:var(--success);font-size:16px;margin:0;">💰 EARN Analytics</h3>
-                        <button class="vault-action-btn" onclick="App.toggleVaultAnalytics()" style="padding:4px 8px;font-size:10px;">
-                            Hide
-                        </button>
-                    </div>
-                    <div class="vault-stat-row">
-                        <div class="vault-stat-mini">
-                            <div class="vault-stat-mini-val">${allItems}</div>
-                            <div class="vault-stat-mini-label">Total Items</div>
-                        </div>
-                        <div class="vault-stat-mini">
-                            <div class="vault-stat-mini-val">${weekItems}</div>
-                            <div class="vault-stat-mini-label">This Week</div>
-                        </div>
-                        <div class="vault-stat-mini">
-                            <div class="vault-stat-mini-val">${monthItems}</div>
-                            <div class="vault-stat-mini-label">This Month</div>
-                        </div>
-                        <div class="vault-stat-mini">
-                            <div class="vault-stat-mini-val">${executed}</div>
-                            <div class="vault-stat-mini-label">Executed</div>
-                        </div>
-                        <div class="vault-stat-mini">
-                            <div class="vault-stat-mini-val">${starred}</div>
-                            <div class="vault-stat-mini-label">Starred</div>
-                        </div>
-                    </div>
-                </div>`;
-        } else {
-            html += `
-                <div style="text-align:center;margin-bottom:16px;">
-                    <button class="btn-sec" onclick="App.toggleVaultAnalytics()">📊 Show Analytics</button>
-                </div>`;
-        }
-        
-        html += `
-            <div class="card" style="margin-bottom:14px;padding:14px;">
-                <div style="font-weight:700;font-size:13px;margin-bottom:10px;color:var(--success);">🌙 Evening Flow (10 min)</div>
-                <div style="font-size:12px;color:var(--dim);line-height:1.7;">
-                    IDEA → STRAT playbook<br>
-                    NOTE → EXEC action<br>
-                    BOOK → SKILL practice<br>
-                    Realization → LEVERAGE target
-                </div>
-            </div>`;
-        
         const sub = this.sub.vault || 'strat';
         html += `
-            <div class="segment">
-                <button class="segment-btn ${sub === 'strat' ? 'active' : ''}" onclick="App.sub.vault='strat';App.render()">⚡ STRAT</button>
-                <button class="segment-btn ${sub === 'exec' ? 'active' : ''}" onclick="App.sub.vault='exec';App.render()">✅ EXEC</button>
-                <button class="segment-btn ${sub === 'leverage' ? 'active' : ''}" onclick="App.sub.vault='leverage';App.render()">🚀 LEVERAGE</button>
-                <button class="segment-btn ${sub === 'contacts' ? 'active' : ''}" onclick="App.sub.vault='contacts';App.render()">👤 CONTACT</button>
+            <div class="vault-sub-nav">
+                <button class="vault-sub-btn ${sub === 'strat' ? 'active' : ''}" onclick="App.sub.vault='strat';App.data.vaultSettings.searchQuery='';App.render()">Strategy</button>
+                <button class="vault-sub-btn ${sub === 'exec' ? 'active' : ''}" onclick="App.sub.vault='exec';App.data.vaultSettings.searchQuery='';App.render()">Execute</button>
+                <button class="vault-sub-btn ${sub === 'leverage' ? 'active' : ''}" onclick="App.sub.vault='leverage';App.data.vaultSettings.searchQuery='';App.render()">Leverage</button>
+                <button class="vault-sub-btn ${sub === 'contacts' ? 'active' : ''}" onclick="App.sub.vault='contacts';App.data.vaultSettings.searchQuery='';App.render()">Contacts</button>
             </div>`;
-        
         html += this.renderEarnSectionEnhanced(sub);
     }
-    
+
+    html += `</div>`;
     return html;
 },
 
@@ -4210,330 +4542,199 @@ renderLearnSectionEnhanced(sub) {
     let html = '';
     let items = this.data.vaultLearn[sub] || [];
     const settings = this.data.vaultSettings;
-    
-    const labels = {
-        ideas: { title: '💡 Ideas', desc: 'Original thinking, mental models, hypotheses', color: 'var(--accent)' },
-        notes: { title: '📝 Notes', desc: 'Observations, reflections, raw insights', color: 'var(--blue)' },
-        books: { title: '📚 Books', desc: 'Compressed knowledge, frameworks, actionable insights', color: 'var(--purple)' },
-        skills: { title: '🎯 Skills', desc: 'Skill levels, weaknesses, practice systems', color: 'var(--success)' }
+
+    const meta = {
+        ideas:  { kanji: '思想 · Shisō',   title: 'Ideas',  desc: 'seeds of original thought'         },
+        notes:  { kanji: '観察 · Kansatsu', title: 'Notes',  desc: 'observations, raw and unfolded'     },
+        books:  { kanji: '知識 · Chishiki', title: 'Books',  desc: 'compressed wisdom from other minds' },
+        skills: { kanji: '技 · Waza',       title: 'Skills', desc: 'the path of deliberate practice'    }
     };
-    
-    const label = labels[sub];
-    
-    // Get all unique tags for this category
-    const allTags = [...new Set(items.flatMap(i => i.tags || []))];
-    
-    // Enhanced Toolbar with all new features
+    const m = meta[sub] || { kanji: '', title: sub, desc: '' };
+
+    // Section header
+    html += `
+        <div class="vault-section-header">
+            <div class="vault-section-kanji">${m.kanji}</div>
+            <div class="vault-section-title">${m.title}</div>
+            <div class="vault-section-desc">${m.desc}</div>
+        </div>
+    `;
+
+    // Toolbar
     html += `
         <div class="vault-toolbar">
-            <button class="btn" onclick="App.addLearnItemEnhanced('${sub}')" style="flex-shrink:0;">+ Add ${label.title}</button>
-            
-            <div style="flex:1;min-width:200px;max-width:400px;position:relative;" class="vault-search-bar">
-                <span class="vault-search-icon">🔍</span>
-                <input type="text" class="vault-search-input" placeholder="Search ${sub}..." 
-                       oninput="App.searchVault(this.value, 'learn', '${sub}')" value="${settings.searchQuery || ''}">
-            </div>
-            
+            <input type="text" class="vault-search-input" placeholder="seek within…"
+                   oninput="App.searchVault(this.value, 'learn', '${sub}')" value="${esc(settings.searchQuery || '')}">
             <select class="vault-sort-dropdown" onchange="App.sortVault(this.value, 'learn', '${sub}')">
-                <option value="recent" ${settings.sortBy === 'recent' ? 'selected' : ''}>Recent First</option>
-                <option value="oldest" ${settings.sortBy === 'oldest' ? 'selected' : ''}>Oldest First</option>
-                <option value="title" ${settings.sortBy === 'title' ? 'selected' : ''}>Title A-Z</option>
-                <option value="importance" ${settings.sortBy === 'importance' ? 'selected' : ''}>Importance</option>
+                <option value="recent"     ${settings.sortBy === 'recent'     ? 'selected' : ''}>Recent</option>
+                <option value="oldest"     ${settings.sortBy === 'oldest'     ? 'selected' : ''}>Oldest</option>
+                <option value="title"      ${settings.sortBy === 'title'      ? 'selected' : ''}>A – Z</option>
+                <option value="importance" ${settings.sortBy === 'importance' ? 'selected' : ''}>Weight</option>
             </select>
-            
-            <button class="vault-action-btn" onclick="App.toggleVaultFilters()" title="Advanced Filters">
-                🎛️ ${settings.showFilters ? 'Hide' : 'Show'} Filters
-            </button>
-            
-            <button class="vault-action-btn" onclick="App.toggleVaultView()" title="Toggle View">
-                ${settings.viewMode === 'card' ? '📋' : settings.viewMode === 'compact' ? '🗂️' : '📅'} 
-            </button>
-            
-            <button class="vault-action-btn" onclick="App.toggleBatchMode('learn', '${sub}')" title="Batch Operations">
-                ${settings.batchMode ? '✓' : '☐'} Batch
-            </button>
-            
-            <button class="vault-action-btn" onclick="App.bulkImportVault('learn', '${sub}')" title="Bulk Import">
-                📥 Import
-            </button>
+            <button class="vault-add-btn" onclick="App.addLearnItemEnhanced('${sub}')">+ Add</button>
         </div>`;
-    
-    // Advanced Filters Panel
-    if (settings.showFilters) {
-        html += `
-            <div class="vault-filters-panel active">
-                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
-                    <div class="vault-filter-group">
-                        <label class="vault-filter-label">Tags</label>
-                        <div class="vault-filter-chips">
-                            ${allTags.map(tag => `
-                                <div class="vault-filter-chip ${settings.selectedTags.includes(tag) ? 'active' : ''}" 
-                                     onclick="App.toggleTagFilter('${esc(tag)}', 'learn', '${sub}')">
-                                    #${esc(tag)}
-                                </div>
-                            `).join('')}
-                            ${allTags.length === 0 ? '<span style="font-size:11px;color:var(--dim);">No tags yet</span>' : ''}
-                        </div>
-                    </div>
-                    
-                    <div class="vault-filter-group">
-                        <label class="vault-filter-label">Importance</label>
-                        <div class="vault-filter-chips">
-                            ${['high', 'medium', 'low'].map(imp => `
-                                <div class="vault-filter-chip ${settings.importanceFilter.includes(imp) ? 'active' : ''}"
-                                     onclick="App.toggleImportanceFilter('${imp}', 'learn', '${sub}')">
-                                    ${imp === 'high' ? '🔴' : imp === 'medium' ? '🟡' : '🔵'} ${imp.toUpperCase()}
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                    
-                    <div class="vault-filter-group">
-                        <label class="vault-filter-label">Quick Filters</label>
-                        <div class="vault-filter-chips">
-                            <div class="vault-filter-chip ${settings.starredOnly ? 'active' : ''}"
-                                 onclick="App.toggleStarredFilter('learn', '${sub}')">
-                                ⭐ Starred Only
-                            </div>
-                            <div class="vault-filter-chip ${settings.pinnedOnly ? 'active' : ''}"
-                                 onclick="App.togglePinnedFilter('learn', '${sub}')">
-                                📌 Pinned Only
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="margin-top:12px;text-align:right;">
-                    <button class="btn-sec" onclick="App.clearAllFilters('learn', '${sub}')" style="font-size:11px;padding:6px 12px;">
-                        Clear All Filters
-                    </button>
-                </div>
-            </div>`;
-    }
-    
-    // Filter items based on search
+
+    // Filter
     if (settings.searchQuery) {
-        const query = settings.searchQuery.toLowerCase();
-        items = items.filter(i => 
-            i.title.toLowerCase().includes(query) || 
-            (i.content && i.content.toLowerCase().includes(query)) ||
-            (i.tags && i.tags.some(t => t.toLowerCase().includes(query)))
+        const q = settings.searchQuery.toLowerCase();
+        items = items.filter(i =>
+            i.title.toLowerCase().includes(q) ||
+            (i.content && i.content.toLowerCase().includes(q)) ||
+            (i.tags && i.tags.some(t => t.toLowerCase().includes(q)))
         );
     }
-    
-    // Sort items
+
     items = this.sortVaultItems(items, settings.sortBy);
-    
-    // Empty state
+
     if (items.length === 0) {
         html += `
-            <div class="empty-state">
-                <div class="empty-state-icon">${label.title.split(' ')[0]}</div>
-                <p>${settings.searchQuery ? 'No matching items found' : label.desc}</p>
-                ${settings.searchQuery ? `<button class="btn-sec" onclick="App.clearVaultSearch('learn', '${sub}')">Clear Search</button>` : ''}
+            <div class="zen-empty">
+                <span class="zen-empty-symbol">◇</span>
+                <span class="zen-empty-text">${settings.searchQuery ? 'Nothing surfaces' : 'The vault is empty here'}</span>
+                <span class="zen-empty-sub">${settings.searchQuery ? 'try different words' : 'add the first entry'}</span>
+                ${settings.searchQuery ? `<div style="margin-top:20px;"><button class="zen-util-btn" onclick="App.clearVaultSearch('learn', '${sub}')">clear search</button></div>` : ''}
             </div>`;
         return html;
     }
-    
-    // Render items
-    items.slice().reverse().forEach((item, idx) => {
-        const date = new Date(item.created).toLocaleDateString();
-        const modified = item.modified ? new Date(item.modified).toLocaleDateString() : null;
+
+    items.forEach((item, idx) => {
+        const date = new Date(item.created).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
         const importance = item.importance || 'low';
-        const importanceClass = `vault-importance-${importance}`;
-        
+        const importanceClass = importance !== 'low' ? `vault-importance-${importance}` : '';
+        const pinnedClass = item.pinned ? 'pinned' : '';
+
         html += `
-            <div class="vault-item-card ${item.starred ? 'starred' : ''} ${item.pinned ? 'pinned' : ''} ${importanceClass} ${settings.batchMode ? 'selectable' : ''} ${settings.batchMode && settings.selectedItems?.includes(`vaultLearn-${sub}-${item.id}`) ? 'selected' : ''}" 
-                 style="animation-delay:${idx * 0.05}s;"
-                 data-item-id="${item.id}"
-                 ${settings.batchMode ? `onclick="App.toggleItemSelection('vaultLearn', '${sub}', '${item.id}')"` : ''}>
+            <div class="vault-item-card ${importanceClass} ${pinnedClass}" style="animation-delay:${idx * 0.045}s;">
                 <div class="vault-item-header">
                     <div class="vault-item-title">${esc(item.title)}</div>
                 </div>
-                
                 <div class="vault-item-meta">
-                    <span>📅 ${date}</span>
-                    ${modified ? `<span>✏️ ${modified}</span>` : ''}
-                    ${item.source ? `<span>🔗 ${esc(item.source)}</span>` : ''}
-                    ${item.importance !== 'low' ? `<span style="color:${importance === 'high' ? 'var(--danger)' : 'var(--warn)'};">⭐ ${importance.toUpperCase()}</span>` : ''}
-                    ${item.pinned ? `<span style="color:var(--accent);">📌 PINNED</span>` : ''}
+                    <span>${date}</span>
+                    ${item.starred ? `<span>starred</span>` : ''}
+                    ${item.source ? `<span>${esc(item.source)}</span>` : ''}
+                    ${importance !== 'low' ? `<span>${importance}</span>` : ''}
                 </div>
-                
-                <div class="vault-item-content">${esc(item.content || '')}</div>
-                
+                ${item.content ? `<div class="vault-item-content">${esc(item.content)}</div>` : ''}
                 ${item.tags && item.tags.length > 0 ? `
                     <div class="vault-item-tags">
-                        ${item.tags.map(tag => `<span class="vault-tag">#${esc(tag)}</span>`).join('')}
+                        ${item.tags.map(tag => `<span class="vault-tag">${esc(tag)}</span>`).join('')}
                     </div>` : ''}
-                
-                ${item.linkedTo && item.linkedTo.length > 0 ? `
-                    <div class="vault-linked-items">
-                        <div style="font-size:11px;color:var(--dim);font-weight:600;margin-bottom:6px;">
-                            🔗 LINKED ITEMS (${item.linkedTo.length})
-                        </div>
-                        ${item.linkedTo.slice(0, 3).map(linkKey => {
-                            const [vType, vCat, vId] = linkKey.split('-');
-                            const linkedItem = this.data[vType][vCat]?.find(i => i.id === vId);
-                            return linkedItem ? `
-                                <div class="vault-linked-item" onclick="App.navigateToLinkedItem('${linkKey}');event.stopPropagation();">
-                                    <span>${vCat === 'ideas' ? '💡' : vCat === 'notes' ? '📝' : vCat === 'books' ? '📚' : vCat === 'skills' ? '🎯' : vCat === 'strat' ? '⚡' : vCat === 'exec' ? '✅' : vCat === 'leverage' ? '🚀' : '👤'}</span>
-                                    <span>${esc(linkedItem.title)}</span>
-                                </div>
-                            ` : '';
-                        }).join('')}
-                        ${item.linkedTo.length > 3 ? `<div style="font-size:10px;color:var(--dim);margin-top:4px;">+${item.linkedTo.length - 3} more...</div>` : ''}
-                    </div>` : ''}
-                
                 <div class="vault-item-footer">
-                    <div class="vault-item-actions">
-                        <button class="vault-action-btn" onclick="App.togglePin('vaultLearn', '${sub}', '${item.id}');event.stopPropagation();" title="Pin">
-                            ${item.pinned ? '📌' : '📍'}
-                        </button>
-                        <button class="vault-action-btn" onclick="App.toggleStar('learn', '${sub}', '${item.id}');event.stopPropagation();" title="Star">
-                            ${item.starred ? '⭐' : '☆'}
-                        </button>
-                        <button class="vault-action-btn" onclick="App.linkItems('vaultLearn', '${sub}', '${item.id}');event.stopPropagation();" title="Link">
-                            🔗
-                        </button>
-                        <button class="vault-action-btn" onclick="App.editLearnItem('${sub}', '${item.id}');event.stopPropagation();" title="Edit">
-                            ✏️
-                        </button>
-                        <button class="vault-action-btn" onclick="App.exportVaultItem('learn', '${sub}', '${item.id}');event.stopPropagation();" title="Export">
-                            📤
-                        </button>
-                        <button class="vault-action-btn danger" onclick="App.deleteLearnItem('${sub}', '${item.id}');event.stopPropagation();" title="Delete">
-                            🗑️
-                        </button>
+                    <div class="vault-item-meta" style="margin:0;">
+                        ${item.starred ? `<span style="opacity:0.5;">✦ starred</span>` : ''}
                     </div>
-                    <button class="btn-sec btn-success" onclick="App.promoteToEarnEnhanced('${sub}', '${item.id}');event.stopPropagation();" style="font-size:11px;padding:6px 10px;">
-                        → Promote to EARN
-                    </button>
+                    <div class="vault-item-actions">
+                        <button class="vault-action-btn" onclick="App.editLearnItem('${sub}', '${item.id}')">Edit</button>
+                        <button class="vault-action-btn" onclick="App.starLearnItem('${sub}', '${item.id}')">${item.starred ? 'Unstar' : 'Star'}</button>
+                        <button class="vault-action-btn" onclick="App.promoteToEarn('learn', '${sub}', '${item.id}')">→ Earn</button>
+                        <button class="vault-action-btn danger" onclick="App.deleteLearnItem('${sub}', '${item.id}')">Release</button>
+                    </div>
                 </div>
             </div>`;
     });
-    
+
     return html;
 },
 
-// ENHANCED EARN SECTION RENDERING
+// EARN SECTION RENDERING — Zen
 renderEarnSectionEnhanced(sub) {
     let html = '';
     let items = this.data.vaultEarn[sub] || [];
     const settings = this.data.vaultSettings;
-    
-    const labels = {
-        strat: { title: '⚡ Strategy', desc: 'Playbooks, rules, checklists, systems', color: 'var(--accent)' },
-        exec: { title: '✅ Execution', desc: 'Action logs, wins/losses, post-mortems', color: 'var(--success)' },
-        leverage: { title: '🚀 Leverage', desc: 'Key people, gatekeepers, opportunities', color: 'var(--purple)' },
-        contacts: { title: '👤 Contacts', desc: 'Network, relationships, interaction history', color: 'var(--blue)' }
+
+    const meta = {
+        strat:    { kanji: '戦略 · Senryaku',  title: 'Strategy',  desc: 'playbooks, rules, systems of action'  },
+        exec:     { kanji: '実行 · Jikkō',      title: 'Execute',   desc: 'action logs, wins, post-mortems'      },
+        leverage: { kanji: '梃子 · Tetsujo',    title: 'Leverage',  desc: 'opportunities and multipliers'        },
+        contacts: { kanji: '縁 · En',           title: 'Contacts',  desc: 'relationships, the web of connection' }
     };
-    
-    const label = labels[sub];
-    
+    const m = meta[sub] || { kanji: '', title: sub, desc: '' };
+
+    // Section header
+    html += `
+        <div class="vault-section-header">
+            <div class="vault-section-kanji">${m.kanji}</div>
+            <div class="vault-section-title">${m.title}</div>
+            <div class="vault-section-desc">${m.desc}</div>
+        </div>
+    `;
+
     // Toolbar
     html += `
         <div class="vault-toolbar">
-            <button class="btn" onclick="App.addEarnItemEnhanced('${sub}')" style="flex-shrink:0;">+ Add ${label.title}</button>
-            <div style="flex:1;min-width:200px;max-width:400px;position:relative;" class="vault-search-bar">
-                <span class="vault-search-icon">🔍</span>
-                <input type="text" class="vault-search-input" placeholder="Search ${sub}..." 
-                       oninput="App.searchVault(this.value, 'earn', '${sub}')" value="${settings.searchQuery || ''}">
-            </div>
+            <input type="text" class="vault-search-input" placeholder="seek within…"
+                   oninput="App.searchVault(this.value, 'earn', '${sub}')" value="${esc(settings.searchQuery || '')}">
             <select class="vault-sort-dropdown" onchange="App.sortVault(this.value, 'earn', '${sub}')">
-                <option value="recent" ${settings.sortBy === 'recent' ? 'selected' : ''}>Recent First</option>
-                <option value="oldest" ${settings.sortBy === 'oldest' ? 'selected' : ''}>Oldest First</option>
-                <option value="title" ${settings.sortBy === 'title' ? 'selected' : ''}>Title A-Z</option>
-                <option value="importance" ${settings.sortBy === 'importance' ? 'selected' : ''}>Importance</option>
+                <option value="recent"     ${settings.sortBy === 'recent'     ? 'selected' : ''}>Recent</option>
+                <option value="oldest"     ${settings.sortBy === 'oldest'     ? 'selected' : ''}>Oldest</option>
+                <option value="title"      ${settings.sortBy === 'title'      ? 'selected' : ''}>A – Z</option>
+                <option value="importance" ${settings.sortBy === 'importance' ? 'selected' : ''}>Weight</option>
             </select>
+            <button class="vault-add-btn" onclick="App.addEarnItemEnhanced('${sub}')">+ Add</button>
         </div>`;
-    
-    // Filter items based on search
+
+    // Filter
     if (settings.searchQuery) {
-        const query = settings.searchQuery.toLowerCase();
-        items = items.filter(i => 
-            i.title.toLowerCase().includes(query) || 
-            (i.content && i.content.toLowerCase().includes(query)) ||
-            (i.tags && i.tags.some(t => t.toLowerCase().includes(query)))
+        const q = settings.searchQuery.toLowerCase();
+        items = items.filter(i =>
+            i.title.toLowerCase().includes(q) ||
+            (i.content && i.content.toLowerCase().includes(q)) ||
+            (i.tags && i.tags.some(t => t.toLowerCase().includes(q)))
         );
     }
-    
-    // Sort items
+
     items = this.sortVaultItems(items, settings.sortBy);
-    
-    // Empty state
+
     if (items.length === 0) {
         html += `
-            <div class="empty-state">
-                <div class="empty-state-icon">${label.title.split(' ')[0]}</div>
-                <p>${settings.searchQuery ? 'No matching items found' : label.desc}</p>
-                ${settings.searchQuery ? `<button class="btn-sec" onclick="App.clearVaultSearch('earn', '${sub}')">Clear Search</button>` : ''}
+            <div class="zen-empty">
+                <span class="zen-empty-symbol">◇</span>
+                <span class="zen-empty-text">${settings.searchQuery ? 'Nothing surfaces' : 'The vault is empty here'}</span>
+                <span class="zen-empty-sub">${settings.searchQuery ? 'try different words' : 'add the first entry'}</span>
+                ${settings.searchQuery ? `<div style="margin-top:20px;"><button class="zen-util-btn" onclick="App.clearVaultSearch('earn', '${sub}')">clear search</button></div>` : ''}
             </div>`;
         return html;
     }
-    
-    // Render items
-    items.slice().reverse().forEach((item, idx) => {
-        const date = new Date(item.created).toLocaleDateString();
-        const modified = item.modified ? new Date(item.modified).toLocaleDateString() : null;
-        const isExec = sub === 'exec';
+
+    const isExec = sub === 'exec';
+
+    items.forEach((item, idx) => {
+        const date = new Date(item.created).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
         const importance = item.importance || 'low';
-        const importanceClass = `vault-importance-${importance}`;
-        
+        const importanceClass = importance !== 'low' ? `vault-importance-${importance}` : '';
+        const completedClass = item.completed ? 'completed-item' : '';
+
         html += `
-            <div class="vault-item-card ${item.starred ? 'starred' : ''} ${importanceClass}" style="animation-delay:${idx * 0.05}s;">
-                ${item.promotedFrom ? `
-                    <div style="display:inline-block;padding:4px 10px;background:var(--accent);color:var(--void);
-                         border-radius:6px;font-size:10px;font-weight:700;margin-bottom:10px;">
-                        ↑ FROM ${item.promotedFrom.toUpperCase()}
-                    </div>` : ''}
-                
+            <div class="vault-item-card ${importanceClass} ${completedClass}" style="animation-delay:${idx * 0.045}s;">
+                ${item.promotedFrom ? `<div class="vault-promoted-badge">distilled from ${esc(item.promotedFrom)}</div>` : ''}
                 <div class="vault-item-header">
                     <div class="vault-item-title">${esc(item.title)}</div>
                 </div>
-                
                 <div class="vault-item-meta">
-                    <span>📅 ${date}</span>
-                    ${modified ? `<span>✏️ ${modified}</span>` : ''}
-                    ${item.source ? `<span>🔗 ${esc(item.source)}</span>` : ''}
-                    ${item.importance !== 'low' ? `<span style="color:${importance === 'high' ? 'var(--danger)' : 'var(--warn)'};">⭐ ${importance.toUpperCase()}</span>` : ''}
-                    ${isExec && item.completed ? `<span style="color:var(--success);">✓ COMPLETED</span>` : ''}
+                    <span>${date}</span>
+                    ${item.starred ? `<span>starred</span>` : ''}
+                    ${isExec && item.completed ? `<span>fulfilled</span>` : ''}
+                    ${importance !== 'low' ? `<span>${importance}</span>` : ''}
                 </div>
-                
-                <div class="vault-item-content">${esc(item.content || '')}</div>
-                
+                ${item.content ? `<div class="vault-item-content">${esc(item.content)}</div>` : ''}
                 ${item.tags && item.tags.length > 0 ? `
                     <div class="vault-item-tags">
-                        ${item.tags.map(tag => `<span class="vault-tag">#${esc(tag)}</span>`).join('')}
+                        ${item.tags.map(tag => `<span class="vault-tag">${esc(tag)}</span>`).join('')}
                     </div>` : ''}
-                
-                ${item.linkedTo && item.linkedTo.length > 0 ? `
-                    <div style="margin-bottom:12px;font-size:11px;color:var(--dim);">
-                        🔗 Linked: ${item.linkedTo.length} item(s)
-                    </div>` : ''}
-                
                 <div class="vault-item-footer">
-                    <div class="vault-item-actions">
-                        <button class="vault-action-btn" onclick="App.toggleStar('earn', '${sub}', '${item.id}')" title="Star">
-                            ${item.starred ? '⭐' : '☆'}
-                        </button>
-                        <button class="vault-action-btn" onclick="App.editEarnItem('${sub}', '${item.id}')" title="Edit">
-                            ✏️
-                        </button>
-                        <button class="vault-action-btn" onclick="App.exportVaultItem('earn', '${sub}', '${item.id}')" title="Export">
-                            📤
-                        </button>
-                        <button class="vault-action-btn danger" onclick="App.deleteEarnItem('${sub}', '${item.id}')" title="Delete">
-                            🗑️
-                        </button>
+                    <div class="vault-item-meta" style="margin:0;">
+                        ${item.starred ? `<span style="opacity:0.5;">✦ starred</span>` : ''}
                     </div>
-                    ${isExec && !item.completed ? `
-                        <button class="btn-sec btn-success" onclick="App.markExecComplete('${item.id}')" style="font-size:11px;padding:6px 10px;">
-                            ✓ Complete
-                        </button>` : ''}
+                    <div class="vault-item-actions">
+                        <button class="vault-action-btn" onclick="App.editEarnItem('${sub}', '${item.id}')">Edit</button>
+                        <button class="vault-action-btn" onclick="App.toggleStar('earn', '${sub}', '${item.id}')">${item.starred ? 'Unstar' : 'Star'}</button>
+                        ${isExec && !item.completed ? `<button class="vault-action-btn" onclick="App.markExecComplete('${item.id}')">Fulfill</button>` : ''}
+                        <button class="vault-action-btn danger" onclick="App.deleteEarnItem('${sub}', '${item.id}')">Release</button>
+                    </div>
                 </div>
             </div>`;
     });
-    
+
     return html;
 },
 
@@ -4794,6 +4995,15 @@ deleteEarnItem(type, itemId) {
     this.toast('✓ Item deleted');
 },
 
+// TOGGLE STAR (Zen aliases)
+starLearnItem(type, itemId) {
+    this.toggleStar('learn', type, itemId);
+},
+
+promoteToEarn(section, type, itemId) {
+    this.promoteToEarnEnhanced(type, itemId);
+},
+
 // TOGGLE STAR
 toggleStar(section, type, itemId) {
     const item = section === 'learn' ? 
@@ -4814,7 +5024,7 @@ promoteToEarnEnhanced(fromType, itemId) {
     const item = this.data.vaultLearn[fromType]?.find(i => i.id === itemId);
     if (!item) return;
     
-    const promotionMap = { ideas: 'strat', notes: 'exec', books: 'skills', skills: 'leverage' };
+    const promotionMap = { ideas: 'strat', notes: 'exec', books: 'leverage', skills: 'contacts' };
     const toType = promotionMap[fromType] || 'strat';
     
     if (!confirm(`Promote to ${toType.toUpperCase()}?`)) return;
@@ -4871,9 +5081,10 @@ sortVaultItems(items, sortBy) {
             return sorted.sort((a, b) => new Date(a.created) - new Date(b.created));
         case 'title':
             return sorted.sort((a, b) => a.title.localeCompare(b.title));
-        case 'importance':
+        case 'importance': {
             const priority = { high: 3, medium: 2, low: 1 };
             return sorted.sort((a, b) => priority[b.importance || 'low'] - priority[a.importance || 'low']);
+        }
         default:
             return sorted;
     }
@@ -7826,311 +8037,382 @@ Drink water
     
     renderReflections() {
         const refType = this.sub._refType || 'morning';
-        let html = `
-            <div class="segment">
-                <button class="segment-btn ${refType === 'morning' ? 'active' : ''}" onclick="App.sub._refType='morning';App.render()">Morning</button>
-                <button class="segment-btn ${refType === 'evening' ? 'active' : ''}" onclick="App.sub._refType='evening';App.render()">Evening</button>
-            </div>
-            
-            <div style="display:flex;gap:8px;margin-bottom:16px;">
-                <button class="btn" style="flex:1;" onclick="App.addReflection('${refType}')">
-                    ${refType === 'morning' ? '🌅 Morning' : '🌙 Evening'} Reflection
-                </button>
-                <button class="btn-sec" style="width:auto;padding:0 16px;" onclick="App.showSystemTemplates('reflections', '${refType}')">📋</button>
-            </div>
-            
-            <div style="display:flex;gap:8px;margin-bottom:16px;">
-                <button class="btn-sec" style="flex:1;" onclick="App.showReflectionAnalytics()">📊 Analytics</button>
-                <button class="btn-sec" style="flex:1;" onclick="App.toggleSystemBulkMode('reflections')">
-                    ${this.bulkMode.reflections ? '✓ Bulk Mode' : '☐ Bulk Mode'}
-                </button>
-                <button class="btn-sec" style="flex:1;" onclick="App.exportAllSystemItems('reflections', '${refType}')">📥 Export</button>
+        const isMorning = refType === 'morning';
+
+        let html = `<div class="zen-container">`;
+
+        // Zen header
+        html += `
+            <div class="zen-header">
+                <div class="zen-header-kanji">${isMorning ? '朝の思索 · Chō no shisaku' : '夜の思索 · Yoru no shisaku'}</div>
+                <div class="zen-header-title">${isMorning ? 'Morning Reflection' : 'Evening Reflection'}</div>
+                <div class="zen-header-subtitle">${isMorning ? 'Set the tone of your day with intention' : 'Let the day settle into understanding'}</div>
             </div>
         `;
-        
-        // Search box
+
+        // Morning / Evening switcher
         html += `
-            <div style="position:relative;margin-bottom:16px;">
-                <input type="text" placeholder="Search reflections..." 
-                       style="padding-right:40px;width:100%;padding:12px;background:var(--sub);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:var(--font);font-size:14px;"
+            <div class="zen-segment">
+                <button class="zen-seg-btn morning ${isMorning ? 'active' : ''}" onclick="App.sub._refType='morning';App.render()">
+                    Dawn
+                </button>
+                <button class="zen-seg-btn evening ${!isMorning ? 'active' : ''}" onclick="App.sub._refType='evening';App.render()">
+                    Dusk
+                </button>
+            </div>
+        `;
+
+        // Primary action
+        html += `
+            <div class="zen-action-row">
+                <button class="zen-primary-btn" onclick="App.addReflection('${refType}')">
+                    ${isMorning ? '— begin the morning —' : '— close the evening —'}
+                </button>
+                <button class="zen-icon-btn" title="Templates" onclick="App.showSystemTemplates('reflections', '${refType}')">≡</button>
+            </div>
+        `;
+
+        // Utility row
+        html += `
+            <div class="zen-utility-row">
+                <button class="zen-util-btn" onclick="App.showReflectionAnalytics()">Insights</button>
+                <button class="zen-util-btn ${this.bulkMode.reflections ? 'active' : ''}" onclick="App.toggleSystemBulkMode('reflections')">
+                    ${this.bulkMode.reflections ? 'Select ✓' : 'Select'}
+                </button>
+                <button class="zen-util-btn" onclick="App.exportAllSystemItems('reflections', '${refType}')">Export</button>
+            </div>
+        `;
+
+        // Search
+        html += `
+            <div class="zen-search-wrap">
+                <input type="text" class="zen-search" placeholder="seek within your reflections…"
                        value="${esc(this.reflectionSearch)}"
                        oninput="App.reflectionSearch = this.value; App.render();">
-                ${this.reflectionSearch ? `
-                    <button style="position:absolute;right:12px;top:50%;transform:translateY(-50%);
-                            background:none;border:none;color:var(--dim);cursor:pointer;font-size:20px;line-height:1;"
-                            onclick="App.reflectionSearch = ''; App.render();">
-                        ×
-                    </button>
-                ` : ''}
+                ${this.reflectionSearch ? `<button class="zen-search-clear" onclick="App.reflectionSearch='';App.render()">×</button>` : ''}
             </div>
         `;
-        
-        // Sort dropdown
+
+        // Sort
         html += `
-            <div class="sort-bar">
-                <select class="sort-select" onchange="App.setSystemSort('reflections', this.value)">
-                    <option value="date-desc" ${this.systemSort.reflections === 'date-desc' ? 'selected' : ''}>Date (Newest First)</option>
-                    <option value="date-asc" ${this.systemSort.reflections === 'date-asc' ? 'selected' : ''}>Date (Oldest First)</option>
-                    <option value="modified-desc" ${this.systemSort.reflections === 'modified-desc' ? 'selected' : ''}>Recently Modified</option>
-                    <option value="length-desc" ${this.systemSort.reflections === 'length-desc' ? 'selected' : ''}>Longest First</option>
-                    <option value="tags" ${this.systemSort.reflections === 'tags' ? 'selected' : ''}>Most Tagged</option>
+            <div class="zen-sort-row">
+                <span class="zen-sort-label">Order</span>
+                <select class="zen-sort-select" onchange="App.setSystemSort('reflections', this.value)">
+                    <option value="date-desc" ${this.systemSort.reflections === 'date-desc' ? 'selected' : ''}>Newest first</option>
+                    <option value="date-asc" ${this.systemSort.reflections === 'date-asc' ? 'selected' : ''}>Oldest first</option>
+                    <option value="modified-desc" ${this.systemSort.reflections === 'modified-desc' ? 'selected' : ''}>Recently touched</option>
+                    <option value="length-desc" ${this.systemSort.reflections === 'length-desc' ? 'selected' : ''}>Deepest first</option>
+                    <option value="tags" ${this.systemSort.reflections === 'tags' ? 'selected' : ''}>Most woven</option>
                 </select>
             </div>
         `;
-        
+
         let refs = this.data.system.reflections[refType] || [];
-        
-        // Filter
         if (this.reflectionSearch) {
-            const search = this.reflectionSearch.toLowerCase();
-            refs = refs.filter(r => 
-                r.text.toLowerCase().includes(search) ||
-                new Date(r.date).toLocaleDateString().toLowerCase().includes(search) ||
-                (r.tags || []).some(tag => tag.toLowerCase().includes(search))
+            const s = this.reflectionSearch.toLowerCase();
+            refs = refs.filter(r =>
+                r.text.toLowerCase().includes(s) ||
+                new Date(r.date).toLocaleDateString().toLowerCase().includes(s) ||
+                (r.tags || []).some(t => t.toLowerCase().includes(s))
             );
         }
-        
-        // Sort
         refs = this.sortSystemItems(refs, this.systemSort.reflections);
-        
-        // Render items
+
         if (refs.length === 0) {
-            html += `<div class="empty-state"><div class="empty-state-icon">${refType === 'morning' ? '🌅' : '🌙'}</div><p>${this.reflectionSearch ? 'No matching reflections' : 'No reflections yet'}</p></div>`;
+            html += `
+                <div class="zen-empty">
+                    <span class="zen-empty-symbol">${isMorning ? '☀' : '☽'}</span>
+                    <span class="zen-empty-text">${this.reflectionSearch ? 'No echoes found' : 'The page awaits your first words'}</span>
+                    <span class="zen-empty-sub">stillness precedes clarity</span>
+                </div>
+            `;
         } else {
             refs.forEach(r => {
                 const isSelected = this.selectedItems.reflections.has(r.id);
-                html += `<div class="card">
-                    ${this.bulkMode.reflections ? `
-                        <div class="checkbox ${isSelected ? 'checked' : ''}" 
-                             onclick="App.toggleSystemItemSelection('reflections', '${r.id}')">
+                const dateStr = new Date(r.date).toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+                html += `
+                    <div class="zen-card zen-card-${refType}" style="display:flex;flex-direction:column;">
+                        ${this.bulkMode.reflections ? `
+                            <div style="display:flex;align-items:flex-start;gap:12px;">
+                                <div class="zen-checkbox ${isSelected ? 'checked' : ''}"
+                                     onclick="App.toggleSystemItemSelection('reflections', '${r.id}')"></div>
+                                <div style="flex:1;">
+                        ` : ''}
+                        <div class="zen-date">
+                            <div class="zen-date-line"></div>
+                            <div class="zen-date-text">${dateStr}</div>
+                            <div class="zen-date-line"></div>
                         </div>
-                    ` : ''}
-                    <div style="font-size:11px;color:var(--accent);text-transform:uppercase;margin-bottom:8px;">
-                        📅 ${new Date(r.date).toLocaleDateString()}
-                    </div>
-                    <div style="white-space:pre-wrap;line-height:1.6;">${esc(r.text)}</div>
-                    
-                    ${(r.tags || []).length > 0 ? `
-                        <div class="tags">
-                            ${r.tags.map(tag => `<span class="tag">🏷️ ${esc(tag)}</span>`).join('')}
+                        <div class="zen-body">${esc(r.text)}</div>
+                        ${(r.tags || []).length > 0 ? `
+                            <div class="zen-tags">
+                                ${r.tags.map(t => `<span class="zen-tag">${esc(t)}</span>`).join('')}
+                            </div>
+                        ` : ''}
+                        ${r.modified ? `<div class="zen-edited">revised ${new Date(r.modified).toLocaleDateString()}</div>` : ''}
+                        <div class="zen-card-actions">
+                            <button class="zen-act-btn" onclick="App.editReflection('${refType}', '${r.id}')">Edit</button>
+                            <button class="zen-act-btn" onclick="App.promptAddSystemTag('reflections', '${refType}', '${r.id}')">Tag</button>
+                            <button class="zen-act-btn" onclick="App.exportSystemItem('reflections', '${refType}', '${r.id}')">Export</button>
+                            <button class="zen-act-btn danger" onclick="App.deleteReflection('${refType}', '${r.id}')">Release</button>
                         </div>
-                    ` : ''}
-                    
-                    ${r.modified ? `
-                        <div style="font-size:10px;color:var(--dim);margin-top:8px;">✏️ Edited ${new Date(r.modified).toLocaleDateString()}</div>
-                    ` : ''}
-                    
-                    <div class="action-btns">
-                        <button class="action-btn" onclick="App.editReflection('${refType}', '${r.id}')">✏️ Edit</button>
-                        <button class="action-btn" onclick="App.promptAddSystemTag('reflections', '${refType}', '${r.id}')">🏷️ Tag</button>
-                        <button class="action-btn" onclick="App.exportSystemItem('reflections', '${refType}', '${r.id}')">📥 Export</button>
-                        <button class="action-btn danger" onclick="App.deleteReflection('${refType}', '${r.id}')">🗑️ Delete</button>
+                        ${this.bulkMode.reflections ? `</div></div>` : ''}
                     </div>
-                </div>`;
+                `;
             });
         }
-        
-        // Bulk toolbar
+
+        html += `</div>`;
+
         if (this.bulkMode.reflections && this.selectedItems.reflections.size > 0) {
             this.renderBulkToolbar('reflections', refType);
         }
-        
+
         return html;
     },
     
     renderJournal() {
-        let html = `
-            <div style="display:flex;gap:8px;margin-bottom:16px;">
-                <button class="btn" style="flex:1;" onclick="App.addJournalEntry()">✍️ New Entry</button>
-                <button class="btn-sec" style="width:auto;padding:0 16px;" onclick="App.showSystemTemplates('journal', '')">📋</button>
-            </div>
-            
-            <div style="display:flex;gap:8px;margin-bottom:16px;">
-                <button class="btn-sec" style="flex:1;" onclick="App.showJournalAnalytics()">📊 Analytics</button>
-                <button class="btn-sec" style="flex:1;" onclick="App.toggleSystemBulkMode('journal')">
-                    ${this.bulkMode.journal ? '✓ Bulk Mode' : '☐ Bulk Mode'}
-                </button>
-                <button class="btn-sec" style="flex:1;" onclick="App.exportAllSystemItems('journal', '')">📥 Export</button>
+        let html = `<div class="zen-container">`;
+
+        // Zen header
+        html += `
+            <div class="zen-header">
+                <div class="zen-header-kanji">日記 · Nikki</div>
+                <div class="zen-header-title">The Journal</div>
+                <div class="zen-header-subtitle">where the unnamed becomes word</div>
             </div>
         `;
-        
-        // Search box
+
+        // Primary action
         html += `
-            <div style="position:relative;margin-bottom:16px;">
-                <input type="text" placeholder="Search journal entries..." 
-                       style="padding-right:40px;width:100%;padding:12px;background:var(--sub);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:var(--font);font-size:14px;"
+            <div class="zen-action-row">
+                <button class="zen-primary-btn" onclick="App.addJournalEntry()">
+                    — open a new page —
+                </button>
+                <button class="zen-icon-btn" title="Templates" onclick="App.showSystemTemplates('journal', '')">≡</button>
+            </div>
+        `;
+
+        // Utility row
+        html += `
+            <div class="zen-utility-row">
+                <button class="zen-util-btn" onclick="App.showJournalAnalytics()">Insights</button>
+                <button class="zen-util-btn ${this.bulkMode.journal ? 'active' : ''}" onclick="App.toggleSystemBulkMode('journal')">
+                    ${this.bulkMode.journal ? 'Select ✓' : 'Select'}
+                </button>
+                <button class="zen-util-btn" onclick="App.exportAllSystemItems('journal', '')">Export</button>
+            </div>
+        `;
+
+        // Search
+        html += `
+            <div class="zen-search-wrap">
+                <input type="text" class="zen-search" placeholder="wander through your pages…"
                        value="${esc(this.journalSearch)}"
                        oninput="App.journalSearch = this.value; App.render();">
-                ${this.journalSearch ? `
-                    <button style="position:absolute;right:12px;top:50%;transform:translateY(-50%);
-                            background:none;border:none;color:var(--dim);cursor:pointer;font-size:20px;line-height:1;"
-                            onclick="App.journalSearch = ''; App.render();">
-                        ×
-                    </button>
-                ` : ''}
+                ${this.journalSearch ? `<button class="zen-search-clear" onclick="App.journalSearch='';App.render()">×</button>` : ''}
             </div>
         `;
-        
-        // Sort dropdown
+
+        // Sort
         html += `
-            <div class="sort-bar">
-                <select class="sort-select" onchange="App.setSystemSort('journal', this.value)">
-                    <option value="date-desc" ${this.systemSort.journal === 'date-desc' ? 'selected' : ''}>Date (Newest First)</option>
-                    <option value="date-asc" ${this.systemSort.journal === 'date-asc' ? 'selected' : ''}>Date (Oldest First)</option>
-                    <option value="modified-desc" ${this.systemSort.journal === 'modified-desc' ? 'selected' : ''}>Recently Modified</option>
-                    <option value="length-desc" ${this.systemSort.journal === 'length-desc' ? 'selected' : ''}>Longest First</option>
-                    <option value="tags" ${this.systemSort.journal === 'tags' ? 'selected' : ''}>Most Tagged</option>
+            <div class="zen-sort-row">
+                <span class="zen-sort-label">Order</span>
+                <select class="zen-sort-select" onchange="App.setSystemSort('journal', this.value)">
+                    <option value="date-desc" ${this.systemSort.journal === 'date-desc' ? 'selected' : ''}>Newest first</option>
+                    <option value="date-asc" ${this.systemSort.journal === 'date-asc' ? 'selected' : ''}>Oldest first</option>
+                    <option value="modified-desc" ${this.systemSort.journal === 'modified-desc' ? 'selected' : ''}>Recently touched</option>
+                    <option value="length-desc" ${this.systemSort.journal === 'length-desc' ? 'selected' : ''}>Deepest first</option>
+                    <option value="tags" ${this.systemSort.journal === 'tags' ? 'selected' : ''}>Most woven</option>
                 </select>
             </div>
         `;
-        
+
         let entries = this.data.system.journal || [];
-        
-        // Filter
         if (this.journalSearch) {
-            const search = this.journalSearch.toLowerCase();
-            entries = entries.filter(e => 
-                e.text.toLowerCase().includes(search) ||
-                new Date(e.date).toLocaleDateString().toLowerCase().includes(search) ||
-                (e.tags || []).some(tag => tag.toLowerCase().includes(search))
+            const s = this.journalSearch.toLowerCase();
+            entries = entries.filter(e =>
+                e.text.toLowerCase().includes(s) ||
+                new Date(e.date).toLocaleDateString().toLowerCase().includes(s) ||
+                (e.tags || []).some(t => t.toLowerCase().includes(s))
             );
         }
-        
-        // Sort
         entries = this.sortSystemItems(entries, this.systemSort.journal);
-        
-        // Render items
+
         if (entries.length === 0) {
-            html += `<div class="empty-state"><div class="empty-state-icon">✍️</div><p>${this.journalSearch ? 'No matching entries' : 'No journal entries yet'}</p></div>`;
+            html += `
+                <div class="zen-empty">
+                    <span class="zen-empty-symbol">✦</span>
+                    <span class="zen-empty-text">${this.journalSearch ? 'No pages match your search' : 'Your journal holds no words yet'}</span>
+                    <span class="zen-empty-sub">emptiness is the first sentence</span>
+                </div>
+            `;
         } else {
             entries.forEach(e => {
                 const isSelected = this.selectedItems.journal.has(e.id);
-                html += `<div class="card">
-                    ${this.bulkMode.journal ? `
-                        <div class="checkbox ${isSelected ? 'checked' : ''}" 
-                             onclick="App.toggleSystemItemSelection('journal', '${e.id}')">
+                const dateStr = new Date(e.date).toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+                html += `
+                    <div class="zen-card">
+                        ${this.bulkMode.journal ? `
+                            <div style="display:flex;align-items:flex-start;gap:12px;">
+                                <div class="zen-checkbox ${isSelected ? 'checked' : ''}"
+                                     onclick="App.toggleSystemItemSelection('journal', '${e.id}')"></div>
+                                <div style="flex:1;">
+                        ` : ''}
+                        <div class="zen-date">
+                            <div class="zen-date-line"></div>
+                            <div class="zen-date-text">${dateStr}</div>
+                            <div class="zen-date-line"></div>
                         </div>
-                    ` : ''}
-                    <div style="font-size:11px;color:var(--accent);text-transform:uppercase;margin-bottom:8px;">
-                        📅 ${new Date(e.date).toLocaleDateString()}
-                    </div>
-                    <div style="white-space:pre-wrap;line-height:1.6;">${esc(e.text)}</div>
-                    
-                    ${(e.tags || []).length > 0 ? `
-                        <div class="tags">
-                            ${e.tags.map(tag => `<span class="tag">🏷️ ${esc(tag)}</span>`).join('')}
+                        <div class="zen-body">${esc(e.text)}</div>
+                        ${(e.tags || []).length > 0 ? `
+                            <div class="zen-tags">
+                                ${e.tags.map(t => `<span class="zen-tag">${esc(t)}</span>`).join('')}
+                            </div>
+                        ` : ''}
+                        ${e.modified ? `<div class="zen-edited">revised ${new Date(e.modified).toLocaleDateString()}</div>` : ''}
+                        <div class="zen-card-actions">
+                            <button class="zen-act-btn" onclick="App.editJournalEntry('${e.id}')">Edit</button>
+                            <button class="zen-act-btn" onclick="App.promptAddSystemTag('journal', '', '${e.id}')">Tag</button>
+                            <button class="zen-act-btn" onclick="App.exportSystemItem('journal', '', '${e.id}')">Export</button>
+                            <button class="zen-act-btn danger" onclick="App.deleteJournalEntry('${e.id}')">Release</button>
                         </div>
-                    ` : ''}
-                    
-                    ${e.modified ? `
-                        <div style="font-size:10px;color:var(--dim);margin-top:8px;">✏️ Edited ${new Date(e.modified).toLocaleDateString()}</div>
-                    ` : ''}
-                    
-                    <div class="action-btns">
-                        <button class="action-btn" onclick="App.editJournalEntry('${e.id}')">✏️ Edit</button>
-                        <button class="action-btn" onclick="App.promptAddSystemTag('journal', '', '${e.id}')">🏷️ Tag</button>
-                        <button class="action-btn" onclick="App.exportSystemItem('journal', '', '${e.id}')">📥 Export</button>
-                        <button class="action-btn danger" onclick="App.deleteJournalEntry('${e.id}')">🗑️ Delete</button>
+                        ${this.bulkMode.journal ? `</div></div>` : ''}
                     </div>
-                </div>`;
+                `;
             });
         }
-        
-        // Bulk toolbar
+
+        html += `</div>`;
+
         if (this.bulkMode.journal && this.selectedItems.journal.size > 0) {
             this.renderBulkToolbar('journal', '');
         }
-        
+
         return html;
     },
     
     renderReviews() {
-        let html = `
-            <div style="display:flex;gap:8px;margin-bottom:16px;">
-                <button class="btn" style="flex:1;" onclick="App.addWeeklyReview()">📊 Weekly Review</button>
-                <button class="btn-sec" style="width:auto;padding:0 16px;" onclick="App.showSystemTemplates('reviews', '')">📋</button>
-            </div>
-            
-            <div style="display:flex;gap:8px;margin-bottom:16px;">
-                <button class="btn-sec" style="flex:1;" onclick="App.showReviewAnalytics()">📊 Analytics</button>
-                <button class="btn-sec" style="flex:1;" onclick="App.toggleSystemBulkMode('reviews')">
-                    ${this.bulkMode.reviews ? '✓ Bulk Mode' : '☐ Bulk Mode'}
-                </button>
-                <button class="btn-sec" style="flex:1;" onclick="App.exportAllSystemItems('reviews', '')">📥 Export</button>
+        let html = `<div class="zen-container">`;
+
+        // Zen header
+        html += `
+            <div class="zen-header">
+                <div class="zen-header-kanji">週次省察 · Shūji Shōsatsu</div>
+                <div class="zen-header-title">Weekly Review</div>
+                <div class="zen-header-subtitle">harvest what was, sow what shall be</div>
             </div>
         `;
-        
-        // Sort dropdown
+
+        // Primary action
         html += `
-            <div class="sort-bar">
-                <select class="sort-select" onchange="App.setSystemSort('reviews', this.value)">
-                    <option value="date-desc" ${this.systemSort.reviews === 'date-desc' ? 'selected' : ''}>Date (Newest First)</option>
-                    <option value="date-asc" ${this.systemSort.reviews === 'date-asc' ? 'selected' : ''}>Date (Oldest First)</option>
-                    <option value="modified-desc" ${this.systemSort.reviews === 'modified-desc' ? 'selected' : ''}>Recently Modified</option>
-                    <option value="length-desc" ${this.systemSort.reviews === 'length-desc' ? 'selected' : ''}>Longest First</option>
-                    <option value="tags" ${this.systemSort.reviews === 'tags' ? 'selected' : ''}>Most Tagged</option>
+            <div class="zen-action-row">
+                <button class="zen-primary-btn" onclick="App.addWeeklyReview()">
+                    — begin this week's review —
+                </button>
+                <button class="zen-icon-btn" title="Templates" onclick="App.showSystemTemplates('reviews', '')">≡</button>
+            </div>
+        `;
+
+        // Utility row
+        html += `
+            <div class="zen-utility-row">
+                <button class="zen-util-btn" onclick="App.showReviewAnalytics()">Insights</button>
+                <button class="zen-util-btn ${this.bulkMode.reviews ? 'active' : ''}" onclick="App.toggleSystemBulkMode('reviews')">
+                    ${this.bulkMode.reviews ? 'Select ✓' : 'Select'}
+                </button>
+                <button class="zen-util-btn" onclick="App.exportAllSystemItems('reviews', '')">Export</button>
+            </div>
+        `;
+
+        // Sort
+        html += `
+            <div class="zen-sort-row">
+                <span class="zen-sort-label">Order</span>
+                <select class="zen-sort-select" onchange="App.setSystemSort('reviews', this.value)">
+                    <option value="date-desc" ${this.systemSort.reviews === 'date-desc' ? 'selected' : ''}>Newest first</option>
+                    <option value="date-asc" ${this.systemSort.reviews === 'date-asc' ? 'selected' : ''}>Oldest first</option>
+                    <option value="modified-desc" ${this.systemSort.reviews === 'modified-desc' ? 'selected' : ''}>Recently touched</option>
+                    <option value="length-desc" ${this.systemSort.reviews === 'length-desc' ? 'selected' : ''}>Deepest first</option>
+                    <option value="tags" ${this.systemSort.reviews === 'tags' ? 'selected' : ''}>Most woven</option>
                 </select>
             </div>
         `;
-        
+
         let reviews = this.data.system.reviews || [];
-        
-        // Sort
         reviews = this.sortSystemItems(reviews, this.systemSort.reviews);
-        
-        // Render items
+
         if (reviews.length === 0) {
-            html += `<div class="empty-state"><div class="empty-state-icon">📊</div><p>No reviews yet</p></div>`;
+            html += `
+                <div class="zen-empty">
+                    <span class="zen-empty-symbol">◎</span>
+                    <span class="zen-empty-text">No reviews written yet</span>
+                    <span class="zen-empty-sub">the examined life begins here</span>
+                </div>
+            `;
         } else {
             reviews.forEach(r => {
                 const isSelected = this.selectedItems.reviews.has(r.id);
-                html += `<div class="card">
-                    ${this.bulkMode.reviews ? `
-                        <div class="checkbox ${isSelected ? 'checked' : ''}" 
-                             onclick="App.toggleSystemItemSelection('reviews', '${r.id}')">
+                const weekStr = new Date(r.date).toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+                html += `
+                    <div class="zen-card">
+                        ${this.bulkMode.reviews ? `
+                            <div style="display:flex;align-items:flex-start;gap:12px;">
+                                <div class="zen-checkbox ${isSelected ? 'checked' : ''}"
+                                     onclick="App.toggleSystemItemSelection('reviews', '${r.id}')"></div>
+                                <div style="flex:1;">
+                        ` : ''}
+                        <div class="zen-date">
+                            <div class="zen-date-line"></div>
+                            <div class="zen-date-text">Week of ${weekStr}</div>
+                            <div class="zen-date-line"></div>
                         </div>
-                    ` : ''}
-                    <div style="font-size:11px;color:var(--accent);text-transform:uppercase;margin-bottom:12px;">
-                        📅 Week of ${new Date(r.date).toLocaleDateString()}
-                    </div>
-                    <div style="margin-bottom:10px;">
-                        <div style="font-size:12px;font-weight:700;color:var(--dim);margin-bottom:4px;">Wins</div>
-                        <div style="white-space:pre-wrap;line-height:1.6;">${esc(r.wins || '')}</div>
-                    </div>
-                    <div style="margin-bottom:10px;">
-                        <div style="font-size:12px;font-weight:700;color:var(--dim);margin-bottom:4px;">Lessons</div>
-                        <div style="white-space:pre-wrap;line-height:1.6;">${esc(r.lessons || '')}</div>
-                    </div>
-                    <div style="margin-bottom:12px;">
-                        <div style="font-size:12px;font-weight:700;color:var(--dim);margin-bottom:4px;">Next Week</div>
-                        <div style="white-space:pre-wrap;line-height:1.6;">${esc(r.nextWeek || '')}</div>
-                    </div>
-                    
-                    ${(r.tags || []).length > 0 ? `
-                        <div class="tags">
-                            ${r.tags.map(tag => `<span class="tag">🏷️ ${esc(tag)}</span>`).join('')}
+
+                        ${r.wins ? `
+                            <div class="zen-review-section">
+                                <div class="zen-review-label">Victories</div>
+                                <div class="zen-body" style="font-size:15px;">${esc(r.wins)}</div>
+                            </div>
+                        ` : ''}
+
+                        ${r.lessons ? `
+                            <div class="zen-review-section">
+                                <div class="zen-review-label">Lessons</div>
+                                <div class="zen-body" style="font-size:15px;">${esc(r.lessons)}</div>
+                            </div>
+                        ` : ''}
+
+                        ${r.nextWeek ? `
+                            <div class="zen-review-section">
+                                <div class="zen-review-label">Intentions Ahead</div>
+                                <div class="zen-body" style="font-size:15px;">${esc(r.nextWeek)}</div>
+                            </div>
+                        ` : ''}
+
+                        ${(r.tags || []).length > 0 ? `
+                            <div class="zen-tags">
+                                ${r.tags.map(t => `<span class="zen-tag">${esc(t)}</span>`).join('')}
+                            </div>
+                        ` : ''}
+                        ${r.modified ? `<div class="zen-edited">revised ${new Date(r.modified).toLocaleDateString()}</div>` : ''}
+                        <div class="zen-card-actions">
+                            <button class="zen-act-btn" onclick="App.editReview('${r.id}')">Edit</button>
+                            <button class="zen-act-btn" onclick="App.promptAddSystemTag('reviews', '', '${r.id}')">Tag</button>
+                            <button class="zen-act-btn" onclick="App.exportSystemItem('reviews', '', '${r.id}')">Export</button>
+                            <button class="zen-act-btn danger" onclick="App.deleteReview('${r.id}')">Release</button>
                         </div>
-                    ` : ''}
-                    
-                    ${r.modified ? `
-                        <div style="font-size:10px;color:var(--dim);margin-top:8px;">✏️ Edited ${new Date(r.modified).toLocaleDateString()}</div>
-                    ` : ''}
-                    
-                    <div class="action-btns">
-                        <button class="action-btn" onclick="App.editReview('${r.id}')">✏️ Edit</button>
-                        <button class="action-btn" onclick="App.promptAddSystemTag('reviews', '', '${r.id}')">🏷️ Tag</button>
-                        <button class="action-btn" onclick="App.exportSystemItem('reviews', '', '${r.id}')">📥 Export</button>
-                        <button class="action-btn danger" onclick="App.deleteReview('${r.id}')">🗑️ Delete</button>
+                        ${this.bulkMode.reviews ? `</div></div>` : ''}
                     </div>
-                </div>`;
+                `;
             });
         }
-        
-        // Bulk toolbar
+
+        html += `</div>`;
+
         if (this.bulkMode.reviews && this.selectedItems.reviews.size > 0) {
             this.renderBulkToolbar('reviews', '');
         }
-        
+
         return html;
     },
     
@@ -8555,14 +8837,22 @@ Drink water
         const title = document.getElementById('note-title')?.value?.trim();
         const content = document.getElementById('note-content')?.value?.trim();
         if (!title || !content) { this.toast('⚠️ Enter title and content'); return; }
-        if (!this.data.vault.learnings.notes) this.data.vault.learnings.notes = [];
-        this.data.vault.learnings.notes.push({
+        if (!this.data.vaultLearn) this.data.vaultLearn = { ideas: [], notes: [], books: [], skills: [] };
+        if (!this.data.vaultLearn.notes) this.data.vaultLearn.notes = [];
+        this.data.vaultLearn.notes.push({
             id: this.genId(),
             title,
             content,
-            date: new Date().toISOString()
+            tags: [],
+            importance: 'low',
+            starred: false,
+            pinned: false,
+            source: '',
+            created: new Date().toISOString(),
+            modified: null,
+            linkedTo: []
         });
-        this.save(); this.closeModal(); this.render();
+        this.save(); this.closeModal(); this.navigate(4); this.sub.vaultMain = 'learn'; this.sub.vault = 'notes'; this.render();
         this.toast('✓ Note saved');
     },
 
@@ -8923,14 +9213,22 @@ Drink water
         const title = document.getElementById('idea-title')?.value?.trim();
         const description = document.getElementById('idea-desc')?.value?.trim();
         if (!title) { this.toast('⚠️ Enter title'); return; }
-        if (!this.data.vault.resources.ideas) this.data.vault.resources.ideas = [];
-        this.data.vault.resources.ideas.push({
+        if (!this.data.vaultLearn) this.data.vaultLearn = { ideas: [], notes: [], books: [], skills: [] };
+        if (!this.data.vaultLearn.ideas) this.data.vaultLearn.ideas = [];
+        this.data.vaultLearn.ideas.push({
             id: this.genId(),
             title,
-            description: description || '',
-            date: new Date().toISOString()
+            content: description || '',
+            tags: [],
+            importance: 'low',
+            starred: false,
+            pinned: false,
+            source: '',
+            created: new Date().toISOString(),
+            modified: null,
+            linkedTo: []
         });
-        this.save(); this.closeModal(); this.render();
+        this.save(); this.closeModal(); this.navigate(4); this.sub.vaultMain = 'learn'; this.sub.vault = 'ideas'; this.render();
         this.toast('✓ Idea captured');
     },
 
